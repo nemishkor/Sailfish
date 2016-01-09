@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/iconPrefix">
+        <file>icon-launcher-messaging.png</file>
+        <file>icon-launcher-people.png</file>
+        <file>icon-view.png</file>
+        <file>icon-vote.png</file>
+        <file>fit.png</file>
+        <file>tile.png</file>
+        <file>original.png</file>
+        <file>images/hue.png</file>
+    </qresource>
+    <qresource prefix="/main">
+        <file>colors-bg.png</file>
+        <file>preview-category.png</file>
+        <file>preview-category-color.png</file>
+        <file>preview-category-patterns.png</file>
+    </qresource>
+</RCC>

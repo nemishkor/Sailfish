@@ -36,6 +36,13 @@ import QtGraphicalEffects 1.0
 Page {
     id: page
 
+    onStatusChanged: {
+        console.log("status " + status);
+        if (status == 0)
+            if(page == pageStack.currentPage)
+                console.log("PageStack.back");
+    }
+
     XmlListModel{
         id: listModel
         query: path
@@ -51,7 +58,7 @@ Page {
         XmlRole {name: "hex"; query: "hex/string()"}
         XmlRole {name: "red"; query: "rgb/red/string()"}
         XmlRole {name: "blue"; query: "rgb/blue/string()"}
-        XmlRole {name: "green"; query: "rgb/blue/string()"}
+        XmlRole {name: "green"; query: "rgb/green/string()"}
         XmlRole {name: "hue"; query: "hsv/hue/string()"}
         XmlRole {name: "saturation"; query: "hsv/saturation/string()"}
         XmlRole {name: "value"; query: "hsv/value/string()"}
@@ -60,12 +67,43 @@ Page {
         XmlRole {name: "imageUrl"; query: "imageUrl/string()"}
         XmlRole {name: "badgeUrl"; query: "badgeUrl/string()"}
         XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
+        onStatusChanged: {
+            if(status == XmlListModel.Ready)
+                if(count == 1)
+                    if(category == "Random"){
+                        pageStack.push("ItemPage.qml", {
+                                           id: listModel.get(0).id,
+                                           category: category,
+                                           tittle: listModel.get(0).title,
+                                           userName: listModel.get(0).userName,
+                                           numViews: listModel.get(0).numViews,
+                                           numVotes: listModel.get(0).numVotes,
+                                           numComments: listModel.get(0).numComments,
+                                           numHearts: listModel.get(0).numHearts,
+                                           dateCreated: listModel.get(0).dateCreated,
+                                           hex: listModel.get(0).hex,
+                                           red: listModel.get(0).red,
+                                           blue: listModel.get(0).blue,
+                                           green: listModel.get(0).green,
+                                           hue: listModel.get(0).hue,
+                                           saturation: listModel.get(0).saturation,
+                                           value: listModel.get(0).value,
+                                           description: listModel.get(0).description,
+                                           url: listModel.get(0).url,
+                                           imageUrl: listModel.get(0).imageUrl,
+                                           badgeUrl: listModel.get(0).badgeUrl,
+                                           apiUrl: listModel.get(0).apiUrl,
+                                           type: listModel.get(0).type })
+                    }
+        }
     }
+
+    property string title;
 
     property string type;
     property string category;
     property string path;
-    property int heightDelegate: 120;
+    property int heightDelegate: 150;
     property int resultOffset: 0;
     property string dataURI;
 
@@ -83,7 +121,8 @@ Page {
                     if(listModel.count == 1){
                         heightDelegate = page.height
                     }
-                    list.visible = true;
+                    if(category != "Random")
+                        list.visible = true;
                 } else {
                     console.log("HTTP request failed", req.status)
                     loadLbl.text = "HTTP request failed\nRequest status " + req.status + "\nCheck your Internet connection"
@@ -93,12 +132,10 @@ Page {
     }
 
 
-
-
-
     Component.onCompleted: {
         loadXml()
     }
+
     ProgressBar {
         id: loadingModel
         width: parent.width
@@ -120,11 +157,12 @@ Page {
 
     SilicaListView
     {
+        visible: (category == "Random") ? false : true
         width: parent.width
         height: parent.height
         header: PageHeader {
             id: header
-            title: qsTr(category + " " + type)
+            title: qsTr(title)
         }
         id : list
         model : listModel
@@ -149,10 +187,12 @@ Page {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 MouseArea{
+
                     anchors.fill: parent
                     onClicked: {
                         pageStack.push("ItemPage.qml", {
                                            id: id,
+                                           category: category,
                                            tittle: title,
                                            userName: userName,
                                            numViews: numViews,
@@ -180,7 +220,7 @@ Page {
                 width: parent.width
                 height: parent.height
                 gradient: Gradient {
-                    GradientStop { position: 0.0; color: "#cc000000" }
+                    GradientStop { position: 0.0; color: "#aa000000" }
                     GradientStop { position: 0.7; color: "#00000000" }
                 }
                 Column{
@@ -207,6 +247,7 @@ Page {
         }
         VerticalScrollDecorator {}
         PushUpMenu{
+            visible: (category == "Random") ? false : true
             MenuItem {
                 text: qsTr("Load more")
                 onClicked: {

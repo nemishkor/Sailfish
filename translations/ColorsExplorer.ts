@@ -75,6 +75,10 @@
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loading</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ListPage</name>

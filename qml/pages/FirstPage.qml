@@ -38,6 +38,8 @@ import Sailfish.Silica 1.0
 
 Page {
     id: coverPage
+    orientation: Orientation.All
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -67,6 +69,7 @@ Page {
             }
 
             ComboBox {
+                id: colorsMenuItem
                 Image{
                     width: parent.width; height: parent.height - 2 * Theme.paddingSmall
                     fillMode: Image.PreserveAspectFit
@@ -80,6 +83,7 @@ Page {
                 label: "Colors"
                 currentIndex: -1
                 width: parent.width
+                onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
                         text: "New"
@@ -87,7 +91,8 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
-                                               category: text })
+                                               category: text,
+                                               title: "New colors", })
                         }
                     }
                     MenuItem {
@@ -96,22 +101,25 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
-                                               category: text })
+                                               category: text,
+                                               title: "Top colors", })
                         }
                     }
-//                    MenuItem {
-//                        text: "Random (exprerimental)"
-//                        onClicked: {
-//                            pageStack.push("ListPage.qml", {
-//                                               type: "colors",
-//                                               path: "/colors/color",
-//                                               category: text })
-//                        }
-//                    }
+                    MenuItem {
+                        text: "Random"
+                        onClicked: {
+                            pageStack.push("ItemPage.qml", {
+                                               type: "colors",
+                                               path: "/colors/color",
+                                               category: text,
+                                               title: "Random color", })
+                        }
+                    }
                 }
             }
 
             ComboBox {
+                id: palettesMenuItem
                 Image{
                     width: parent.width; height: parent.height - 2 * Theme.paddingSmall
                     fillMode: Image.PreserveAspectFit
@@ -125,6 +133,7 @@ Page {
                 label: "Palettes"
                 currentIndex: -1
                 width: parent.width
+                onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
                         text: "New"
@@ -133,7 +142,8 @@ Page {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
-                                               category: text })
+                                               category: text,
+                                               title: "New palettes", })
                         }
                     }
                     MenuItem {
@@ -143,7 +153,8 @@ Page {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
-                                               category: text })
+                                               category: text,
+                                               title: "Top palettes", })
                         }
                     }
 //                    MenuItem {
@@ -160,6 +171,7 @@ Page {
             }
 
             ComboBox {
+                id: patternsMenuItem
                 Image{
                     width: parent.width; height: parent.height - 2 * Theme.paddingSmall
                     fillMode: Image.PreserveAspectFit
@@ -170,31 +182,31 @@ Page {
                     anchors.rightMargin: Theme.paddingLarge
                     anchors.topMargin: Theme.paddingSmall
                 }
-                id: patterns
                 label: "Patterns"
                 currentIndex: -1
                 width: parent.width
+                onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
                         text: "New"
                         onClicked: {
-                            patterns.currentIndex = -1
                             pageStack.push("ListPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
-                                               category: text })
+                                               category: text,
+                                               title: "New patterns", })
                         }
                     }
                     MenuItem {
                         text: "Top"
                         onClicked: {
-                            patterns.currentIndex = -1
                             pageStack.push("ListPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
-                                               category: text })
+                                               category: text,
+                                               title: "Top patterns", })
                         }
                     }
 //                    MenuItem {

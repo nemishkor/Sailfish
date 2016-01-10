@@ -30,12 +30,11 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.XmlListModel 2.0
 
 
 Page {
     id: page
-
-    property string type;
 
     property int id;
     property string tittle;
@@ -58,6 +57,115 @@ Page {
     property string badgeUrl;
     property string apiUrl;
 
+    property string type;
+    property string category;
+    property string path;
+    property string dataURI;
+
+    XmlListModel{
+        id: listModel
+        query: path
+        XmlRole {name: "id"; query: "id/string()"}
+        XmlRole {name: "title"; query: "title/string()"}
+        XmlRole {name: "userName"; query: "userName/string()"}
+        XmlRole {name: "numViews"; query: "numViews/string()"}
+        XmlRole {name: "numVotes"; query: "numVotes/string()"}
+        XmlRole {name: "numComments"; query: "numComments/string()"}
+        XmlRole {name: "numHearts"; query: "numHearts/string()"}
+        XmlRole {name: "rank"; query: "rank/string()"}
+        XmlRole {name: "dateCreated"; query: "dateCreated/string()"}
+        XmlRole {name: "hex"; query: "hex/string()"}
+        XmlRole {name: "red"; query: "rgb/red/string()"}
+        XmlRole {name: "blue"; query: "rgb/blue/string()"}
+        XmlRole {name: "green"; query: "rgb/green/string()"}
+        XmlRole {name: "hue"; query: "hsv/hue/string()"}
+        XmlRole {name: "saturation"; query: "hsv/saturation/string()"}
+        XmlRole {name: "value"; query: "hsv/value/string()"}
+        XmlRole {name: "description"; query: "description/string()"}
+        XmlRole {name: "url"; query: "url/string()"}
+        XmlRole {name: "imageUrl"; query: "imageUrl/string()"}
+        XmlRole {name: "badgeUrl"; query: "badgeUrl/string()"}
+        XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
+        onStatusChanged: {
+            console.log("onStatusChanged")
+            if(status == XmlListModel.Ready){
+                console.log("status == XmlListModel.Ready")
+                if(count == 1){
+                    console.log("count == 1")
+                    id = listModel.get(0).id
+                    category = category
+                    tittle = listModel.get(0).title
+                    userName = listModel.get(0).userName
+                    numViews = listModel.get(0).numViews
+                    numVotes = listModel.get(0).numVotes
+                    numComments = listModel.get(0).numComments
+                    numHearts = listModel.get(0).numHearts
+                    dateCreated = listModel.get(0).dateCreated
+                    hex = listModel.get(0).hex
+                    red = listModel.get(0).red
+                    blue = listModel.get(0).blue
+                    green = listModel.get(0).green
+                    hue = listModel.get(0).hue
+                    saturation = listModel.get(0).saturation
+                    value = listModel.get(0).value
+                    description = listModel.get(0).description
+                    url = listModel.get(0).url
+                    imageUrl = listModel.get(0).imageUrl
+                    badgeUrl = listModel.get(0).badgeUrl
+                    apiUrl = listModel.get(0).apiUrl
+
+                    loadingModel.visible = false
+                    column.visible = true
+                }
+            }
+        }
+    }
+
+    function loadXml(){
+        console.log("!!!!!!")
+        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=1"
+        console.log(dataURI)
+        var req = new XMLHttpRequest();
+        req.open("get", dataURI);
+        req.send();
+        req.onreadystatechange = function () {
+            if (req.readyState === XMLHttpRequest.DONE) {
+                if (req.status === 200) {
+                    listModel.xml = req.responseText;
+                    listModel.reload();
+                } else {
+                    console.log("HTTP request failed", req.status)
+                    loadLbl.text = "HTTP request failed\nRequest status " + req.status + "\nCheck your Internet connection"
+                }
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        if(category == "Random"){
+            console.log("category=Random")
+            loadXml();
+        }
+    }
+
+    ProgressBar {
+        id: loadingModel
+        visible: (category == "Random") ? true : false
+        width: parent.width
+        height: 50
+        indeterminate: true
+        label: qsTr("Loading")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        Label{
+            id: loadLbl
+            anchors.top: parent.bottom
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: TextEdit.WordWrap
+        }
+    }
+
     SilicaFlickable {
         id: listView
         anchors.fill: parent
@@ -66,8 +174,21 @@ Page {
         Column{
             id: column
             width: parent.width
+            visible: (category == "Random") ? false : true
             PageHeader {
                 title: tittle
+            }
+            Button{
+                id: btnReload
+                visible: (category == "Random") ? true : false
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Next random"
+                onClicked: {
+                    loadingModel.visible = true
+                    loadXml()
+                    column.visible = false
+                }
+                anchors.bottomMargin: Theme.paddingMedium
             }
             Image{
                 id: mainImage
@@ -116,7 +237,7 @@ Page {
                         onClicked: {
                             mainImage.fillMode = Image.PreserveAspectFit
                             mainImage.width = mainImage.parent.width
-                            x: 0
+                            mainImage.x = 0
                             imageFillMode.source = "qrc:/iconPrefix/fit.png" }
                     }
                 }

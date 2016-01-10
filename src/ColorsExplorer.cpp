@@ -32,7 +32,6 @@
 #include <QtQuick>
 #endif
 #include <QtQml>
-#include <src/clipboard.h>
 #include <sailfishapp.h>
 
 
@@ -47,6 +46,5 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
-    qmlRegisterType<Clipboard>("Clipboard", 1, 0, "Clip");
     return SailfishApp::main(argc, argv);
 }

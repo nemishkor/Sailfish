@@ -472,6 +472,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: red
+                            anchors.leftMargin: (red == 0) ? 30 : 0
                         }
                     }
                 }
@@ -502,6 +503,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: green
+                            anchors.leftMargin: (green == 0) ? 30 : 0
                         }
                     }
                 }
@@ -532,6 +534,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: blue
+                            anchors.leftMargin: (blue == 0) ? 30 : 0
                         }
                     }
                 }

@@ -15,4 +15,7 @@
         <file>preview-category-color.png</file>
         <file>preview-category-patterns.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>qml/content/History.js</file>
+    </qresource>
 </RCC>

@@ -131,7 +131,6 @@ Page {
         }
     }
 
-
     Component.onCompleted: {
         loadXml()
     }

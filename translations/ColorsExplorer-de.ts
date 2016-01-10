@@ -68,6 +68,10 @@
 <context>
     <name>ItemPage</name>
     <message>
+        <source>Loading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Image size: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,7 +80,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading</source>
+        <source>RGB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HSV</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

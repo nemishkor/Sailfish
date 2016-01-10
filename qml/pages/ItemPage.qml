@@ -31,6 +31,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
+import QtGraphicalEffects 1.0
 
 
 Page {
@@ -62,6 +63,10 @@ Page {
     property string path;
     property string dataURI;
 
+    property variant randomHistory: [];
+    property int randomAction;
+    property int currentRandomHistoryIndex;
+
     XmlListModel{
         id: listModel
         query: path
@@ -87,11 +92,11 @@ Page {
         XmlRole {name: "badgeUrl"; query: "badgeUrl/string()"}
         XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
         onStatusChanged: {
-            console.log("onStatusChanged")
+            // update page on load new xml
             if(status == XmlListModel.Ready){
-                console.log("status == XmlListModel.Ready")
                 if(count == 1){
-                    console.log("count == 1")
+
+                    // UI
                     id = listModel.get(0).id
                     category = category
                     tittle = listModel.get(0).title
@@ -114,17 +119,54 @@ Page {
                     badgeUrl = listModel.get(0).badgeUrl
                     apiUrl = listModel.get(0).apiUrl
 
+                    // UX
                     loadingModel.visible = false
                     column.visible = true
+
+                    // history
+                    if(randomAction == 0){ // if search new random color
+                        var tmp = [];
+                        if(randomHistory.valueOf(currentRandomHistoryIndex))
+                            tmp = randomHistory.splice(currentRandomHistoryIndex, randomHistory.length - 1 - currentRandomHistoryIndex);
+                        else
+                            tmp = randomHistory
+                        tmp.push(hex);
+                        randomHistory = tmp
+                    }
+                    if(randomAction == 1){ // if open next color in history
+                        if(randomHistory.valueOf(currentRandomHistoryIndex + 1)){
+                            currentRandomHistoryIndex++
+                        }
+                    }
+                    if(randomAction == -1){ // if open prev color in history
+                        if(randomHistory.valueOf(currentRandomHistoryIndex - 1)){
+                            currentRandomHistoryIndex--
+                        }
+                    }
+                    randomAction = -2;
                 }
             }
         }
     }
 
     function loadXml(){
-        console.log("!!!!!!")
-        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=1"
-        console.log(dataURI)
+        var id;
+        console.log("randomAction = " + randomAction)
+        if(randomAction == 1){ // if open next color in history
+            console.log("randomHistory.valueOf(currentRandomHistoryIndex + 1)) = " + randomHistory.valueOf(currentRandomHistoryIndex + 1))
+            if(randomHistory.valueOf(currentRandomHistoryIndex + 1))
+                console.log("true 1")
+                dataURI = "http://www.colourlovers.com/api/color/" + randomHistory.valueOf(currentRandomHistoryIndex + 1)
+        } else {
+            if(randomAction == -1){ // if open prev color in history
+                console.log("randomHistory.valueOf(currentRandomHistoryIndex - 1)) = " + randomHistory.valueOf(currentRandomHistoryIndex - 1))
+                if(randomHistory.valueOf(currentRandomHistoryIndex - 1))
+                    console.log("true -1")
+                    dataURI = "http://www.colourlovers.com/api/color/" + randomHistory.valueOf(currentRandomHistoryIndex - 1)
+            } else
+                dataURI = "http://www.colourlovers.com/api/" + type + "/random"
+        }
+        console.log("dataURI=" + dataURI)
         var req = new XMLHttpRequest();
         req.open("get", dataURI);
         req.send();
@@ -143,7 +185,7 @@ Page {
 
     Component.onCompleted: {
         if(category == "Random"){
-            console.log("category=Random")
+            randomAction = 0;
             loadXml();
         }
     }
@@ -178,18 +220,48 @@ Page {
             PageHeader {
                 title: tittle
             }
-            Button{
-                id: btnReload
-                visible: (category == "Random") ? true : false
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Next random"
-                onClicked: {
-                    loadingModel.visible = true
-                    loadXml()
-                    column.visible = false
-                }
-                anchors.bottomMargin: Theme.paddingMedium
-            }
+//            Row{
+//                visible: (category == "Random") ? true : false
+//                anchors.bottomMargin: Theme.paddingMedium
+//                Button{
+//                    id: btnPrev
+//                    text: "<-"
+//                    onClicked: {
+//                        loadingModel.visible = true
+//                        randomAction = -1;
+//                        loadXml();
+//                        column.visible = false
+//                    }
+//                    width: page.width / 9
+//                    anchors.leftMargin: page.width / 9
+//                }
+
+//                Button{
+//                    id: btnReload
+//                    text: "Next random"
+//                    onClicked: {
+//                        loadingModel.visible = true
+//                        randomAction = 0;
+//                        loadXml();
+//                        column.visible = false
+//                    }
+//                    width: page.width / 9 * 3
+//                    anchors.leftMargin: page.width / 9
+//                }
+
+//                Button{
+//                    id: btnNext
+//                    text: "->"
+//                    onClicked: {
+//                        loadingModel.visible = true
+//                        randomAction = 1;
+//                        loadXml();
+//                        column.visible = false
+//                    }
+//                    width: page.width / 9
+//                    anchors.leftMargin: page.width / 9
+//                }
+//            }
             Image{
                 id: mainImage
                 source: imageUrl
@@ -424,7 +496,7 @@ Page {
                 horizontalAlignment: Text.AlignLeft
                 //truncationMode: TruncationMode.Fade
                 color: Theme.secondaryHighlightColor
-                wrapMode: Text.NoWrap
+                wrapMode: Text.WordWrap
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
@@ -437,15 +509,27 @@ Page {
                 visible: (type == "colors") ? true : false
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "hex: " + hex
+                text: "hex: #" + hex
             }
-
-
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                text: "Created: " + dateCreated
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                text: "id: " + id
+            }
             Rectangle{
                 visible: (type == "colors") ? true : false
                 width: parent.width
-                height: 91
+                height: 340
                 color: "transparent"
+                SectionHeader {
+                    id: rgbHeader
+                    text: qsTr("RGB")
+                }
                 // RED INDICATOR
                 Rectangle{
                     id: redInd
@@ -454,7 +538,7 @@ Page {
                     border.width: 1
                     height: 25
                     radius: 8
-                    anchors.top: parent.top
+                    anchors.top: rgbHeader.bottom
                     anchors.topMargin: Theme.paddingSmall
                     x: Theme.paddingLarge
                     width: parent.width - 2 * Theme.paddingLarge
@@ -465,14 +549,14 @@ Page {
                         anchors.left: parent.left
                         height: parent.height
                         Label{
-                            font.pixelSize: 22
+                            font.pixelSize: 24
                             anchors.fill: parent
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: red
-                            anchors.leftMargin: (red == 0) ? 30 : 0
+                            anchors.leftMargin: (red < 10) ? (red + 15) : 0
                         }
                     }
                 }
@@ -496,14 +580,14 @@ Page {
                         anchors.left: parent.left
                         height: parent.height
                         Label{
-                            font.pixelSize: 22
+                            font.pixelSize: 24
                             anchors.fill: parent
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: green
-                            anchors.leftMargin: (green == 0) ? 30 : 0
+                            anchors.leftMargin: (green < 10) ? (green + 15) : 0
                         }
                     }
                 }
@@ -527,129 +611,185 @@ Page {
                         anchors.left: parent.left
                         height: parent.height
                         Label{
-                            font.pixelSize: 22
+                            font.pixelSize: 24
                             anchors.fill: parent
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: blue
-                            anchors.leftMargin: (blue == 0) ? 30 : 0
+                            anchors.leftMargin: (blue < 10) ? (blue + 15) : 0
+                        }
+                    }
+                }
+                SectionHeader {
+                    id: hsvHeader
+                    text: qsTr("HSV")
+                    anchors.topMargin: Theme.paddingSmall
+                    anchors.bottomMargin: Theme.paddingSmall
+                    anchors.top: blueInd.bottom
+                }
+                // HUE INDICATOR
+                Rectangle{
+                    id: hueInd
+                    color: "transparent"
+                    border.color: "#8ec4de"
+                    border.width: 1
+                    radius: 8
+                    x: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
+                    height: 32
+                    anchors.topMargin: Theme.paddingSmall
+                    anchors.bottomMargin: Theme.paddingSmall
+                    anchors.top: hsvHeader.bottom
+                    Rectangle{
+                        radius: 8
+                        rotation: 90
+                        gradient: Gradient{
+                            GradientStop{ position: 0.0; color: "red" }
+                            GradientStop{ position: 0.15; color: "magenta" }
+                            GradientStop{ position: 0.30; color: "blue" }
+                            GradientStop{ position: 0.45; color: "cyan" }
+                            GradientStop{ position: 0.70; color: "green" }
+                            GradientStop{ position: 0.85; color: "yellow" }
+                            GradientStop{ position: 1.0; color: "red" }
+                        }
+                        height: parent.width * hue / 360
+                        width: 32
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.leftMargin: parent.width * hue / 360 / 2 - 16
+                        anchors.topMargin: -1 * parent.width * hue / 360 / 2 + 16
+                        Label{
+                            id: hueIndLbl
+                            font.pixelSize: 22
+                            anchors.fill: parent
+                            rotation: 270
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            text: "hue " + hue
+                            anchors.leftMargin: (hue < 50) ? (hue + 50) : 0
+                            color: (hue < 50) ? "white" : "black"
+                        }
+                    }
+                }
+                // SATURATION INDICATOR
+                Rectangle{
+                    id: satInd
+                    color: "transparent"
+                    border.color: "#8ec4de"
+                    border.width: 1
+                    radius: 8
+                    x: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
+                    height: 32
+                    anchors.topMargin: Theme.paddingSmall
+                    anchors.bottomMargin: Theme.paddingSmall
+                    anchors.top: hueInd.bottom
+                    Rectangle{
+                        radius: 8
+                        rotation: 270
+                        gradient: Gradient{
+                            GradientStop{ position: 0.0; color: "#808080" }
+                            GradientStop{ position: 1.0; color: "#" + hex }
+                        }
+                        height: parent.width * saturation / 100
+                        width: 32
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.leftMargin: parent.width * saturation / 100 / 2 - 16
+                        anchors.topMargin: -1 * parent.width * saturation / 100 / 2 + 16
+                        Label{
+                            id: satIndLbl
+                            font.pixelSize: 22
+                            anchors.fill: parent
+                            rotation: 90
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.leftMargin: (saturation < 25) ? (saturation + 25) : 0
+                            color: (saturation < 25) ? "white" : "black"
+                            text: "saturation " + saturation
+                        }
+                    }
+                }
+                // VALUE INDICATOR
+                Rectangle{
+                    id: valInd
+                    color: "transparent"
+                    border.color: "#8ec4de"
+                    border.width: 1
+                    radius: 8
+                    x: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
+                    height: 32
+                    anchors.topMargin: Theme.paddingSmall
+                    anchors.bottomMargin: Theme.paddingSmall
+                    anchors.top: satInd.bottom
+                    Rectangle{
+                        radius: 8
+                        rotation: 270
+                        gradient: Gradient{
+                            GradientStop{ position: 0.0; color: "#000000" }
+                            GradientStop{ position: 0.5; color: "#" + hex }
+                            GradientStop{ position: 1.0; color: "#fff" }
+                        }
+                        height: parent.width * value / 255
+                        width: 32
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.leftMargin: parent.width * value / 255 / 2 - 16
+                        anchors.topMargin: -1 * parent.width * value / 255 / 2 + 16
+                        Label{
+                            id: valIndLbl
+                            font.pixelSize: 22
+                            anchors.fill: parent
+                            rotation: 90
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.leftMargin: (value < 50) ? (value + 50) : 0
+                            color: (value < 50) ? "white" : "black"
+                            text: "value " + value
                         }
                     }
                 }
             }
-//            // HUE INDICATOR
-//            Rectangle{
-//                color: "transparent"
-//                border.color: "#8ec4de"
-//                border.width: 1
-//                radius: 8
-//                anchors.topMargin: Theme.paddingMedium
-//                anchors.bottomMargin: Theme.paddingMedium
-//                height: parent.width - 2 * Theme.paddingMedium
-//                x: Theme.paddingMedium
-//                rotation: 90
-//                width: 25
-//                Rectangle{
-//                    radius: 8
-//                    gradient: Gradient{
-//                        GradientStop{ position: 0.0; color: "red" }
-//                        GradientStop{ position: 0.15; color: "magenta" }
-//                        GradientStop{ position: 0.30; color: "blue" }
-//                        GradientStop{ position: 0.45; color: "cyan" }
-//                        GradientStop{ position: 0.70; color: "green" }
-//                        GradientStop{ position: 0.85; color: "yellow" }
-//                        GradientStop{ position: 1.0; color: "red" }
-//                    }
-//                    width: parent.width * hue / 360
-//                    anchors.left: parent.left
-//                    height: parent.height
-//                    Label{
-//                        font.pixelSize: 22
-//                        anchors.fill: parent
-//                        anchors.verticalCenter: parent.verticalCenter
-//                        anchors.horizontalCenter: parent.horizontalCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        horizontalAlignment: Text.AlignHCenter
-//                        text: "hue " + hue
-//                    }
-//                }
-//            }
-//            // SATURATION INDICATOR
-//            Rectangle{
-//                color: "transparent"
-//                border.color: "#8ec4de"
-//                border.width: 1
-//                height: 25
-//                radius: 8
-//                anchors.topMargin: Theme.paddingMedium
-//                anchors.bottomMargin: Theme.paddingMedium
-//                x: Theme.paddingMedium
-//                width: parent.width - 2 * Theme.paddingMedium
-//                Rectangle{
-//                    radius: 8
-//                    gradient: Gradient{
-//                        GradientStop{ position: 0.0; color: "#808080" }
-//                        GradientStop{ position: 1.0; color: "#" + hex }
-//                    }
-//                    width: parent.width * saturation / 255
-//                    anchors.left: parent.left
-//                    height: parent.height
-//                    Label{
-//                        font.pixelSize: 22
-//                        anchors.fill: parent
-//                        anchors.verticalCenter: parent.verticalCenter
-//                        anchors.horizontalCenter: parent.horizontalCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        horizontalAlignment: Text.AlignHCenter
-//                        text: "saturation" + saturation
-//                    }
-//                }
-//            }
-//            // VALUE INDICATOR
-//            Rectangle{
-//                color: "transparent"
-//                border.color: "#8ec4de"
-//                border.width: 1
-//                height: 25
-//                radius: 8
-//                anchors.topMargin: Theme.paddingMedium
-//                anchors.bottomMargin: Theme.paddingMedium
-//                x: Theme.paddingMedium
-//                width: parent.width - 2 * Theme.paddingMedium
-//                Rectangle{
-//                    radius: 8
-//                    gradient: Gradient{
-//                        GradientStop{ position: 0.0; color: "#000000" }
-//                        GradientStop{ position: 0.5; color: "#" + hex }
-//                        GradientStop{ position: 1.0; color: "#fff" }
-//                    }
-//                    width: parent.width * value / 255
-//                    anchors.left: parent.left
-//                    height: parent.height
-//                    Label{
-//                        font.pixelSize: 22
-//                        anchors.fill: parent
-//                        anchors.verticalCenter: parent.verticalCenter
-//                        anchors.horizontalCenter: parent.horizontalCenter
-//                        verticalAlignment: Text.AlignVCenter
-//                        horizontalAlignment: Text.AlignHCenter
-//                        text: "value " + value
-//                    }
-//                }
-//            }
+
+            Button {
+                text: "Open this element in browser"
+                anchors.horizontalCenter: parent.horizontalCenter
+                preferredWidth: Theme.buttonWidthMedium
+                anchors.bottomMargin: Theme.paddingMedium
+            }
 
 
-            Label{ visible: (type == "colors") ? true : false; width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "Hue: " + hue }
-            Label{ visible: (type == "colors") ? true : false; width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "Saturation: " + saturation }
-            Label{ visible: (type == "colors") ? true : false; width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "Value: " + value }
-            Label{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "Created: " + dateCreated }
-            Label{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "id: " + id }
-//            Text{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "url " + url }
-//            Text{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "imageUrl " + imageUrl }
-//            Text{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "badgeUrl " + badgeUrl }
-//            Text{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "apiUrl " + apiUrl }
+            Button {
+                text: "Open image in browser"
+                anchors.horizontalCenter: parent.horizontalCenter
+                preferredWidth: Theme.buttonWidthMedium
+                anchors.bottomMargin: Theme.paddingMedium
+            }
+
+
+            Button {
+                text: "Open badge in browser"
+                anchors.horizontalCenter: parent.horizontalCenter
+                preferredWidth: Theme.buttonWidthMedium
+                anchors.bottomMargin: Theme.paddingMedium
+            }
+
+
+            Button {
+                text: "Open api url in browser"
+                anchors.horizontalCenter: parent.horizontalCenter
+                preferredWidth: Theme.buttonWidthMedium
+                anchors.bottomMargin: Theme.paddingMedium
+            }
         }
         VerticalScrollDecorator {}
     }

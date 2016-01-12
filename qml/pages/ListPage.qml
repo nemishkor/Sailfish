@@ -156,7 +156,6 @@ Page {
 
     SilicaListView
     {
-        visible: (category == "Random") ? false : true
         width: parent.width
         height: parent.height
         header: PageHeader {
@@ -246,7 +245,6 @@ Page {
         }
         VerticalScrollDecorator {}
         PushUpMenu{
-            visible: (category == "Random") ? false : true
             MenuItem {
                 text: qsTr("Load more")
                 onClicked: {

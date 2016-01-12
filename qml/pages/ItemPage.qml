@@ -32,7 +32,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
 
-
 Page {
     id: page
 
@@ -206,6 +205,15 @@ Page {
         anchors.fill: parent
         contentHeight: column.height
 
+        PullDownMenu{
+            MenuItem {
+                text: qsTr("View original link")
+                onClicked: {
+                    Qt.openUrlExternally(url);
+                }
+            }
+        }
+
         Column{
             id: column
             width: parent.width
@@ -222,9 +230,11 @@ Page {
                 height: 80
                 anchors.leftMargin: page.width / 9
                 anchors.left: parent.left
-                Button{
+                IconButton {
                     id: btnPrev
-                    text: "<-"
+                    icon.source: "image://theme/icon-m-back?" + (pressed
+                                 ? Theme.highlightColor
+                                 : Theme.primaryColor)
                     enabled: (randomHistory[currentRandomHistoryIndex - 1]) ? true : false
                     onClicked: {
                         loadingModel.visible = true
@@ -232,11 +242,9 @@ Page {
                         loadXml()
                         column.visible = false
                     }
-                    width: page.width / 9
                     anchors.right: btnReload.left
                     anchors.rightMargin: page.width / 9
                 }
-
                 Button{
                     id: btnReload
                     text: "Next random"
@@ -249,10 +257,11 @@ Page {
                     width: page.width / 9 * 3
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
-
-                Button{
+                IconButton {
                     id: btnNext
-                    text: "->"
+                    icon.source: "image://theme/icon-m-forward?" + (pressed
+                                 ? Theme.highlightColor
+                                 : Theme.primaryColor)
                     enabled: (randomHistory[currentRandomHistoryIndex + 1] && currentRandomHistoryIndex != -1) ? true : false
                     onClicked: {
                         loadingModel.visible = true
@@ -260,7 +269,6 @@ Page {
                         loadXml()
                         column.visible = false
                     }
-                    width: page.width / 9
                     anchors.left: btnReload.right
                     anchors.leftMargin: page.width / 9
                 }
@@ -762,16 +770,8 @@ Page {
                 }
             }
 
-            Button {
-                text: "Open this element in browser"
-                anchors.horizontalCenter: parent.horizontalCenter
-                preferredWidth: Theme.buttonWidthMedium
-                onClicked: {
-                    Qt.openUrlExternally(url);
-                }
-            }
 
-
+            /*
             Button {
                 text: "Open image in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -799,7 +799,7 @@ Page {
                 onClicked: {
                     Qt.openUrlExternally(apiUrl);
                 }
-            }
+            }*/
         }
         VerticalScrollDecorator {}
     }

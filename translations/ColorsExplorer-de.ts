@@ -87,6 +87,10 @@
         <source>HSV</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View original link</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ListPage</name>

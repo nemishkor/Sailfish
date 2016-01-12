@@ -157,16 +157,16 @@ Page {
                                                title: "Top palettes", })
                         }
                     }
-//                    MenuItem {
-//                        text: "Random (exprerimental)"
-//                        onClicked: {
-//                            pageStack.push("ListPage.qml", {
-//                                               type: "palettes",
-//                                               path: "/palettes/palette",
-//                                               heightDelegate: 220,
-//                                               category: text })
-//                        }
-//                    }
+                    MenuItem {
+                        text: "Random"
+                        onClicked: {
+                            pageStack.push("ItemPage.qml", {
+                                               type: "palettes",
+                                               path: "/palettes/palette",
+                                               category: text,
+                                               title: "Random palette", })
+                        }
+                    }
                 }
             }
 
@@ -209,17 +209,16 @@ Page {
                                                title: "Top patterns", })
                         }
                     }
-//                    MenuItem {
-//                        text: "Random (exprerimental)"
-//                        onClicked: {
-//                            patterns.currentIndex = -1
-//                            pageStack.push("ListPage.qml", {
-//                                               type: "patterns",
-//                                               path: "/patterns/pattern",
-//                                               heightDelegate: 220,
-//                                               category: text })
-//                        }
-//                    }
+                    MenuItem {
+                        text: "Random"
+                        onClicked: {
+                            pageStack.push("ItemPage.qml", {
+                                               type: "patterns",
+                                               path: "/patterns/pattern",
+                                               category: text,
+                                               title: "Random pattern", })
+                        }
+                    }
                 }
             }
 

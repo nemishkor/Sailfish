@@ -31,7 +31,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
-import QtGraphicalEffects 1.0
 
 
 Page {
@@ -63,9 +62,9 @@ Page {
     property string path;
     property string dataURI;
 
-    property variant randomHistory: [];
+    property var randomHistory: new Array();
     property int randomAction;
-    property int currentRandomHistoryIndex;
+    property int currentRandomHistoryIndex: -1;
 
     XmlListModel{
         id: listModel
@@ -124,26 +123,19 @@ Page {
                     column.visible = true
 
                     // history
-                    if(randomAction == 0){ // if search new random color
-                        var tmp = [];
-                        if(randomHistory.valueOf(currentRandomHistoryIndex))
-                            tmp = randomHistory.splice(currentRandomHistoryIndex, randomHistory.length - 1 - currentRandomHistoryIndex);
-                        else
-                            tmp = randomHistory
-                        tmp.push(hex);
+                    if(randomAction == -1){ // if open prev color in history
+                        if(randomHistory[currentRandomHistoryIndex - 1])
+                            currentRandomHistoryIndex--
+                    }
+                    if(randomAction == 0){ // if search random color when you open not latest color from history
+                        currentRandomHistoryIndex = randomHistory.length
+                        var tmp = randomHistory;
+                        tmp.push(hex)
                         randomHistory = tmp
                     }
-                    if(randomAction == 1){ // if open next color in history
-                        if(randomHistory.valueOf(currentRandomHistoryIndex + 1)){
-                            currentRandomHistoryIndex++
-                        }
+                    if(randomAction == 1){ // if open next color in history or search random
+                        currentRandomHistoryIndex++
                     }
-                    if(randomAction == -1){ // if open prev color in history
-                        if(randomHistory.valueOf(currentRandomHistoryIndex - 1)){
-                            currentRandomHistoryIndex--
-                        }
-                    }
-                    randomAction = -2;
                 }
             }
         }
@@ -151,22 +143,14 @@ Page {
 
     function loadXml(){
         var id;
-        console.log("randomAction = " + randomAction)
         if(randomAction == 1){ // if open next color in history
-            console.log("randomHistory.valueOf(currentRandomHistoryIndex + 1)) = " + randomHistory.valueOf(currentRandomHistoryIndex + 1))
-            if(randomHistory.valueOf(currentRandomHistoryIndex + 1))
-                console.log("true 1")
-                dataURI = "http://www.colourlovers.com/api/color/" + randomHistory.valueOf(currentRandomHistoryIndex + 1)
+            dataURI = "http://www.colourlovers.com/api/color/" + randomHistory[currentRandomHistoryIndex + 1]
         } else {
             if(randomAction == -1){ // if open prev color in history
-                console.log("randomHistory.valueOf(currentRandomHistoryIndex - 1)) = " + randomHistory.valueOf(currentRandomHistoryIndex - 1))
-                if(randomHistory.valueOf(currentRandomHistoryIndex - 1))
-                    console.log("true -1")
-                    dataURI = "http://www.colourlovers.com/api/color/" + randomHistory.valueOf(currentRandomHistoryIndex - 1)
+                dataURI = "http://www.colourlovers.com/api/color/" + randomHistory[currentRandomHistoryIndex - 1]
             } else
                 dataURI = "http://www.colourlovers.com/api/" + type + "/random"
         }
-        console.log("dataURI=" + dataURI)
         var req = new XMLHttpRequest();
         req.open("get", dataURI);
         req.send();
@@ -181,6 +165,15 @@ Page {
                 }
             }
         }
+    }
+
+    function debug(){
+        console.log("---");
+        console.log("randomAction=" + randomAction);
+        console.log("currentRandomHistoryIndex=" + currentRandomHistoryIndex);
+        console.log("randomHistory.length=" + randomHistory.length);
+        for(var i = 0; i < randomHistory.length; i++)
+            console.log("randomHistory[" + i + "]=" + randomHistory[i]);
     }
 
     Component.onCompleted: {
@@ -217,51 +210,61 @@ Page {
             id: column
             width: parent.width
             visible: (category == "Random") ? false : true
+            spacing: Theme.paddingMedium
+            anchors.bottomMargin: Theme.paddingLarge
             PageHeader {
+                id: columnTitle
                 title: tittle
             }
-//            Row{
-//                visible: (category == "Random") ? true : false
-//                anchors.bottomMargin: Theme.paddingMedium
-//                Button{
-//                    id: btnPrev
-//                    text: "<-"
-//                    onClicked: {
-//                        loadingModel.visible = true
-//                        randomAction = -1;
-//                        loadXml();
-//                        column.visible = false
-//                    }
-//                    width: page.width / 9
-//                    anchors.leftMargin: page.width / 9
-//                }
+            Item{
+                visible: (category == "Random") ? true : false
+                width: page.width / 9 * 7
+                height: 80
+                anchors.leftMargin: page.width / 9
+                anchors.left: parent.left
+                Button{
+                    id: btnPrev
+                    text: "<-"
+                    enabled: (randomHistory[currentRandomHistoryIndex - 1]) ? true : false
+                    onClicked: {
+                        loadingModel.visible = true
+                        randomAction = -1
+                        loadXml()
+                        column.visible = false
+                    }
+                    width: page.width / 9
+                    anchors.right: btnReload.left
+                    anchors.rightMargin: page.width / 9
+                }
 
-//                Button{
-//                    id: btnReload
-//                    text: "Next random"
-//                    onClicked: {
-//                        loadingModel.visible = true
-//                        randomAction = 0;
-//                        loadXml();
-//                        column.visible = false
-//                    }
-//                    width: page.width / 9 * 3
-//                    anchors.leftMargin: page.width / 9
-//                }
+                Button{
+                    id: btnReload
+                    text: "Next random"
+                    onClicked: {
+                        loadingModel.visible = true
+                        randomAction = 0
+                        loadXml()
+                        column.visible = false
+                    }
+                    width: page.width / 9 * 3
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
 
-//                Button{
-//                    id: btnNext
-//                    text: "->"
-//                    onClicked: {
-//                        loadingModel.visible = true
-//                        randomAction = 1;
-//                        loadXml();
-//                        column.visible = false
-//                    }
-//                    width: page.width / 9
-//                    anchors.leftMargin: page.width / 9
-//                }
-//            }
+                Button{
+                    id: btnNext
+                    text: "->"
+                    enabled: (randomHistory[currentRandomHistoryIndex + 1] && currentRandomHistoryIndex != -1) ? true : false
+                    onClicked: {
+                        loadingModel.visible = true
+                        randomAction = 1
+                        loadXml()
+                        column.visible = false
+                    }
+                    width: page.width / 9
+                    anchors.left: btnReload.right
+                    anchors.leftMargin: page.width / 9
+                }
+            }
             Image{
                 id: mainImage
                 source: imageUrl
@@ -524,7 +527,7 @@ Page {
             Rectangle{
                 visible: (type == "colors") ? true : false
                 width: parent.width
-                height: 340
+                height: 380
                 color: "transparent"
                 SectionHeader {
                     id: rgbHeader
@@ -556,7 +559,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: red
-                            anchors.leftMargin: (red < 10) ? (red + 15) : 0
+                            anchors.leftMargin: (red < 10) ? (red + 20) : 0
                         }
                     }
                 }
@@ -587,7 +590,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: green
-                            anchors.leftMargin: (green < 10) ? (green + 15) : 0
+                            anchors.leftMargin: (green < 10) ? (green + 20) : 0
                         }
                     }
                 }
@@ -618,7 +621,7 @@ Page {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: blue
-                            anchors.leftMargin: (blue < 10) ? (blue + 15) : 0
+                            anchors.leftMargin: (blue < 10) ? (blue + 20) : 0
                         }
                     }
                 }
@@ -752,7 +755,7 @@ Page {
                             anchors.horizontalCenter: parent.horizontalCenter
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
-                            anchors.leftMargin: (value < 50) ? (value + 50) : 0
+                            //anchors.leftMargin: (value < 50) ? (value + 50) : 0
                             color: (value < 50) ? "white" : "black"
                             text: "value " + value
                         }
@@ -764,7 +767,6 @@ Page {
                 text: "Open this element in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
-                anchors.bottomMargin: Theme.paddingMedium
             }
 
 
@@ -772,7 +774,6 @@ Page {
                 text: "Open image in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
-                anchors.bottomMargin: Theme.paddingMedium
             }
 
 
@@ -780,7 +781,6 @@ Page {
                 text: "Open badge in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
-                anchors.bottomMargin: Theme.paddingMedium
             }
 
 
@@ -788,7 +788,6 @@ Page {
                 text: "Open api url in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
-                anchors.bottomMargin: Theme.paddingMedium
             }
         }
         VerticalScrollDecorator {}

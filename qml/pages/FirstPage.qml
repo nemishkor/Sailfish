@@ -62,6 +62,8 @@ Page {
             Image{
                 fillMode: Image.TileHorizontally
                 source: "qrc:/main/colors-bg.png"
+                width: parent.width
+                height: 1
             }
 
             SectionHeader{

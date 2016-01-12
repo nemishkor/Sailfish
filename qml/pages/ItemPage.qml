@@ -527,7 +527,7 @@ Page {
             Rectangle{
                 visible: (type == "colors") ? true : false
                 width: parent.width
-                height: 380
+                height: (Theme.paddingSmall * 6) + Theme.paddingMedium + rgbHeader.height + redInd.height + greenInd.height + blueInd.height + hsvHeader.height + hueInd.height + satInd.height + valInd.height
                 color: "transparent"
                 SectionHeader {
                     id: rgbHeader
@@ -603,7 +603,6 @@ Page {
                     radius: 8
                     height: 25
                     anchors.topMargin: Theme.paddingSmall
-                    anchors.bottomMargin: Theme.paddingSmall
                     anchors.top: greenInd.bottom
                     x: Theme.paddingLarge
                     width: parent.width - 2 * Theme.paddingLarge
@@ -767,6 +766,9 @@ Page {
                 text: "Open this element in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
+                onClicked: {
+                    Qt.openUrlExternally(url);
+                }
             }
 
 
@@ -774,6 +776,9 @@ Page {
                 text: "Open image in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
+                onClicked: {
+                    Qt.openUrlExternally(imageUrl);
+                }
             }
 
 
@@ -781,6 +786,9 @@ Page {
                 text: "Open badge in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
+                onClicked: {
+                    Qt.openUrlExternally(badgeUrl);
+                }
             }
 
 
@@ -788,6 +796,9 @@ Page {
                 text: "Open api url in browser"
                 anchors.horizontalCenter: parent.horizontalCenter
                 preferredWidth: Theme.buttonWidthMedium
+                onClicked: {
+                    Qt.openUrlExternally(apiUrl);
+                }
             }
         }
         VerticalScrollDecorator {}

@@ -64,6 +64,33 @@
         <source>Color selector</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Stats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HistoryPage</name>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemPage</name>

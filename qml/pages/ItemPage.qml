@@ -31,19 +31,19 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
+import QtQuick.LocalStorage 2.0
 
 Page {
     id: page
-
-    property int id;
+    property int id; // its id for search via api for palettes and patterns
     property string tittle;
-    property string userName;
+    property string userName; // its id for search via api for lovers only
     property int numViews;
     property int numVotes;
     property int numComments;
     property int numHearts;
     property string dateCreated;
-    property string hex;
+    property string hex; // its id for search via api for colors only
     property string red;
     property string blue;
     property string green;
@@ -56,14 +56,26 @@ Page {
     property string badgeUrl;
     property string apiUrl;
 
+    property string dateRegistered;
+    property string dateLastActive;
+    property string rating;
+    property string numColors;
+    property string numPalettes;
+    property string numPatterns;
+    property string numCommentsMade;
+    property string numLovers;
+    property string numCommentsOnProfile;
+
     property string type;
     property string category;
-    property string path;
+    property string path: '/';
     property string dataURI;
 
     property var randomHistory: new Array();
     property int randomAction;
     property int currentRandomHistoryIndex: -1;
+
+    property bool addToHistory: true;
 
     XmlListModel{
         id: listModel
@@ -121,7 +133,7 @@ Page {
                     loadingModel.visible = false
                     column.visible = true
 
-                    // history
+                    // history (local)
                     if(randomAction == -1){ // if open prev color in history
                         if(randomHistory[currentRandomHistoryIndex - 1])
                             currentRandomHistoryIndex--
@@ -131,6 +143,14 @@ Page {
                         var tmp = randomHistory;
                         tmp.push(hex)
                         randomHistory = tmp
+                        // history (global)
+                        if(type == "lovers")
+                            addRow(type, userName)
+                        else
+                            if(type == "palettes" || type == "patterns")
+                                addRow(type, id)
+                            else // else colors
+                                addRow(type, hex)
                     }
                     if(randomAction == 1){ // if open next color in history or search random
                         currentRandomHistoryIndex++
@@ -175,11 +195,47 @@ Page {
             console.log("randomHistory[" + i + "]=" + randomHistory[i]);
     }
 
+
+    // START history logic
+
+    function initDb() {
+        var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000);
+
+        db.transaction(
+            function(tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)')
+            }
+        )
+    }
+
+    function addRow(newType, newId) {
+        console.log('addRow()')
+        var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000);
+        db.transaction(
+            function(tx) {
+                console.log("INSERT INTO History VALUES(null, '" + newType + "','" + newId + "')")
+                tx.executeSql("INSERT INTO History VALUES(null, '" + newType + "','" + newId + "')");
+            }
+        )
+    }
+
+    // END history logic
+
     Component.onCompleted: {
+        initDb
         if(category == "Random"){
-            randomAction = 0;
-            loadXml();
+            randomAction = 0
+            loadXml()
+        } else if(addToHistory) {
+            if(type == "lovers")
+                addRow(type, userName)
+            else
+                if(type == "palettes" || type == "patterns")
+                    addRow(type, id)
+                else // else colors
+                    addRow(type, hex)
         }
+        console.log('type=' + type + ' category=' + category)
     }
 
     ProgressBar {
@@ -217,7 +273,7 @@ Page {
         Column{
             id: column
             width: parent.width
-            visible: (category == "Random") ? false : true
+            visible: (category === "Random" || type === 'lovers') ? false : true
             spacing: Theme.paddingMedium
             anchors.bottomMargin: Theme.paddingLarge
             PageHeader {
@@ -495,10 +551,6 @@ Page {
 //                    text: qsTr("Send")
 //                }
 //            }
-
-            SectionHeader {
-                text: qsTr("Details")
-            }
             Label{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "User name: " + userName }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
@@ -515,23 +567,7 @@ Page {
                     }
                 }
             }
-            Label{
-                id: hexLbl
-                visible: (type == "colors") ? true : false
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: "hex: #" + hex
-            }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium;
-                x: Theme.paddingMedium;
-                text: "Created: " + dateCreated
-            }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium;
-                x: Theme.paddingMedium;
-                text: "id: " + id
-            }
+
             Rectangle{
                 visible: (type == "colors") ? true : false
                 width: parent.width
@@ -771,6 +807,27 @@ Page {
             }
 
 
+            SectionHeader {
+                text: qsTr("Details")
+            }
+            Label{
+                id: hexLbl
+                visible: (type == "colors") ? true : false
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "hex: #" + hex
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                text: "Created: " + dateCreated
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                text: "id: " + id
+            }
+
             /*
             Button {
                 text: "Open image in browser"
@@ -801,6 +858,68 @@ Page {
                 }
             }*/
         }
+
+        Column{
+            id: columnLovers
+            visible: (type === 'lovers') ? true : false
+            width: parent.width
+            spacing: Theme.paddingMedium
+            anchors.bottomMargin: Theme.paddingLarge
+            PageHeader {
+                title: userName
+            }
+
+            SectionHeader {
+                text: qsTr("Details")
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Date registered: " + dateRegistered
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Date last active: " + dateLastActive
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Rating: " + rating
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num colors: " + numColors
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num palettes: " + numPalettes
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num patterns: " + numPatterns
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num comments made: " + numCommentsMade
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num lovers: " + numLovers
+            }
+            Label{
+                width: parent.width - 2 * Theme.paddingMedium
+                x: Theme.paddingMedium
+                text: "Num comments on profile: " + numCommentsOnProfile
+            }
+        }
+
+
         VerticalScrollDecorator {}
     }
 }

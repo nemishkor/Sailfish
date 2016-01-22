@@ -14,7 +14,7 @@ Name:       ColorsExplorer
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Colors Explorer
 Version:    0.2
-Release:    1
+Release:    2
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/

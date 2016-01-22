@@ -98,6 +98,27 @@ Page {
         }
     }
 
+    XmlListModel{
+        id: loversModel
+        query: path
+        XmlRole {name: "userName"; query: "userName/string()"}
+        XmlRole {name: "dateRegistered"; query: "dateRegistered/string()"}
+        XmlRole {name: "dateLastActive"; query: "dateLastActive/string()"}
+        XmlRole {name: "rating"; query: "rating/string()"}
+        XmlRole {name: "numColors"; query: "numColors/string()"}
+        XmlRole {name: "numPalettes"; query: "numPalettes/string()"}
+        XmlRole {name: "numPatterns"; query: "numPatterns/string()"}
+        XmlRole {name: "numCommentsMade"; query: "numCommentsMade/string()"}
+        XmlRole {name: "numLovers"; query: "numLovers/string()"}
+        XmlRole {name: "numCommentsOnProfile"; query: "numCommentsOnProfile/string()"}
+        XmlRole {name: "url"; query: "url/string()"}
+        XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
+        onStatusChanged: {
+            if(status == XmlListModel.Ready)
+                loadingModel.visible = false
+        }
+    }
+
     property string title;
 
     property string type;
@@ -109,20 +130,27 @@ Page {
 
     function loadXml(){
         dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=20" + "&resultOffset=" + resultOffset
-        console.log(dataURI);
-        var req = new XMLHttpRequest();
-        req.open("get", dataURI);
-        req.send();
+        console.log(dataURI)
+        var req = new XMLHttpRequest()
+        req.open("get", dataURI)
+        req.send()
         req.onreadystatechange = function () {
             if (req.readyState === XMLHttpRequest.DONE) {
                 if (req.status === 200) {
-                    listModel.xml = req.responseText;
-                    listModel.reload();
+                    if(type == "lovers"){
+                        loversModel.xml = req.responseText
+                        loversModel.reload()
+                    } else {
+                        listModel.xml = req.responseText
+                        listModel.reload()
+                    }
                     if(listModel.count == 1){
                         heightDelegate = page.height
                     }
-                    if(category != "Random")
-                        list.visible = true;
+                    if(type == "lovers")
+                        loversListView.visible = true
+                    else
+                        listView.visible = true
                 } else {
                     console.log("HTTP request failed", req.status)
                     loadLbl.text = "HTTP request failed\nRequest status " + req.status + "\nCheck your Internet connection"
@@ -156,13 +184,14 @@ Page {
 
     SilicaListView
     {
+        id: listView
+        visible: (type == "lovers") ? false : true
         width: parent.width
         height: parent.height
         header: PageHeader {
             id: header
             title: qsTr(title)
         }
-        id : list
         model : listModel
         delegate: BackgroundItem {
             width: parent.width
@@ -243,24 +272,89 @@ Page {
                 }
             }
         }
+
+
         VerticalScrollDecorator {}
         PushUpMenu{
             MenuItem {
                 text: qsTr("Load more")
                 onClicked: {
                     resultOffset += 20
-                    console.log(resultOffset)
-                    list.scrollToTop()
-                    list.visible = false;
+                    listView.scrollToTop()
+                    listView.visible = false;
                     loadingModel.visible = true;
                     loadXml()
-                    listModel.reload()
-                    list.visible = true;
+                    listView.visible = true;
                 }
             }
             MenuItem{
                 text: qsTr("To top")
-                onClicked: list.scrollToTop()
+                onClicked: listView.scrollToTop()
+            }
+        }
+
+    }
+
+
+    SilicaListView
+    {
+        id: loversListView
+        visible: (type == "lovers") ? true : false
+        width: parent.width
+        height: parent.height
+        header: PageHeader {
+            id: loversHeader
+            title: qsTr(title)
+        }
+        model : loversModel
+        delegate: BackgroundItem {
+            width: parent.width
+            height: 100
+            Label{
+                text: userName
+                x: Theme.horizontalPageMargin
+                anchors.verticalCenter: parent.verticalCenter
+                MouseArea{
+
+                    anchors.fill: parent
+                    onClicked: {
+                        pageStack.push("ItemPage.qml", {
+                                           userName: userName,
+                                           category: category,
+                                           dateRegistered: dateRegistered,
+                                           dateLastActive: dateLastActive,
+                                           rating: rating,
+                                           numColors: numColors,
+                                           numPalettes: numPalettes,
+                                           numPatterns: numPatterns,
+                                           numCommentsMade: numCommentsMade,
+                                           numLovers: numLovers,
+                                           numCommentsOnProfile: numCommentsOnProfile,
+                                           url: url,
+                                           apiUrl: apiUrl,
+                                           type: type })
+                    }
+                }
+            }
+        }
+
+
+        VerticalScrollDecorator {}
+        PushUpMenu{
+            MenuItem {
+                text: qsTr("Load more")
+                onClicked: {
+                    resultOffset += 20
+                    loversListView.scrollToTop()
+                    loversListView.visible = false;
+                    loadingModel.visible = true;
+                    loadXml()
+                    loversListView.visible = true;
+                }
+            }
+            MenuItem{
+                text: qsTr("To top")
+                onClicked: loversListView.scrollToTop()
             }
         }
 

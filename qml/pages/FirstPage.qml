@@ -34,9 +34,63 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.XmlListModel 2.0
 
 
 Page {
+
+    // START for stats section
+    property int currentStatsLoad: 0;
+    function loadStats(category){
+        var dataURI = "http://www.colourlovers.com/api/stats/" + category
+        var req = new XMLHttpRequest()
+        req.open("get", dataURI)
+        req.send()
+        req.onreadystatechange = function () {
+            if (req.readyState === XMLHttpRequest.DONE) {
+                if (req.status === 200) {
+                    statsModel.xml = req.responseText
+                    currentStatsLoad++
+                    statsModel.reload()
+                } else {
+                    console.log("HTTP request failed", req.status)
+                    loadLbl.text = "HTTP request failed\nRequest status " + req.status + "\nCheck your Internet connection"
+                }
+            }
+        }
+    }
+    XmlListModel{
+        id: statsModel
+        query: "/stats"
+        XmlRole {name: "total"; query: "total/string()"}
+        onStatusChanged: {
+            if(status == XmlListModel.Ready){
+                switch(currentStatsLoad){
+                case 1:
+                    totalColorsLbl.text += get(0).total
+                    loadStats("palettes")
+                    break;
+                case 2:
+                    totalPalettesLbl.text += get(0).total
+                    loadStats("patterns")
+                    break;
+                case 3:
+                    totalPatternsLbl.text += get(0).total
+                    loadStats("lovers")
+                    break;
+                case 4:
+                    totalLoversLbl.text += get(0).total
+                    break;
+                }
+            }
+        }
+    }
+    // END for stats section
+
+    Component.onCompleted: {
+        loadStats("colors")
+    }
+
     id: coverPage
     orientation: Orientation.All
 
@@ -48,6 +102,10 @@ Page {
             MenuItem{
                 text: qsTr("About")
                 onClicked: pageStack.push("AboutPage.qml")
+            }
+            MenuItem{
+                text: qsTr("History")
+                onClicked: pageStack.push("HistoryPage.qml")
             }
         }
 
@@ -65,6 +123,8 @@ Page {
                 width: parent.width
                 height: 1
             }
+
+            // CATEGORIES -----------------------------------------------
 
             SectionHeader{
                 text: qsTr("Categories")
@@ -224,6 +284,38 @@ Page {
                 }
             }
 
+            ComboBox {
+                id: loversMenuItem
+                label: "Lovers"
+                currentIndex: -1
+                width: parent.width
+                onCurrentIndexChanged: { _clearCurrent() }
+                menu: ContextMenu {
+                    MenuItem {
+                        text: "New"
+                        onClicked: {
+                            pageStack.push("ListPage.qml", {
+                                               type: "lovers",
+                                               path: "/lovers/lover",
+                                               category: text,
+                                               title: "New lovers", })
+                        }
+                    }
+                    MenuItem {
+                        text: "Top"
+                        onClicked: {
+                            pageStack.push("ListPage.qml", {
+                                               type: "lovers",
+                                               path: "/lovers/lover",
+                                               category: text,
+                                               title: "Top lovers", })
+                        }
+                    }
+                }
+            }
+
+            // TOOLS -----------------------------------------------
+
             SectionHeader{
                 text: qsTr("Tools")
             }
@@ -237,6 +329,41 @@ Page {
                 }
                 onClicked: pageStack.push("ColorsSelectorPage.qml")
             }
+
+            // STATS -----------------------------------------------
+
+            SectionHeader{
+                text: qsTr("Stats")
+            }
+
+            Label{
+                id: totalColorsLbl
+                text: "Total colors: "
+                color: Theme.secondaryColor
+                x: Theme.horizontalPageMargin
+            }
+
+            Label{
+                id: totalPalettesLbl
+                text: "Total palettes: "
+                color: Theme.secondaryColor
+                x: Theme.horizontalPageMargin
+            }
+
+            Label{
+                id: totalPatternsLbl
+                text: "Total patterns: "
+                color: Theme.secondaryColor
+                x: Theme.horizontalPageMargin
+            }
+
+            Label{
+                id: totalLoversLbl
+                text: "Total lovers: "
+                color: Theme.secondaryColor
+                x: Theme.horizontalPageMargin
+            }
+
         }
     }
 }

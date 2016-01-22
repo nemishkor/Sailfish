@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Clipboard 1.0
 
 Page {
     id: page
@@ -40,15 +39,9 @@ Page {
                 }
             }
 
-            Clip{
-                id: clip
-            }
-
             Button{
                 text: "Copy e-mail to clipboard "
                 onClicked: { mail.setClipboard("nemish94@gmail.com")  }
-
-                //onClicked: { clip.copyToClipboard("nemish94@gmail.com") }
             }
 
         }

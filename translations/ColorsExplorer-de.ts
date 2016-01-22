@@ -87,10 +87,6 @@
         <source>To top</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Drop table</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ItemPage</name>

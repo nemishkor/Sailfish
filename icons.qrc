@@ -8,6 +8,7 @@
         <file>tile.png</file>
         <file>original.png</file>
         <file>images/hue.png</file>
+        <file>ColorsExplorer.png</file>
     </qresource>
     <qresource prefix="/main">
         <file>colors-bg.png</file>

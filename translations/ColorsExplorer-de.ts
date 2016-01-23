@@ -40,9 +40,17 @@
     </message>
 </context>
 <context>
-    <name>CoverPage</name>
+    <name>FavoritesPage</name>
     <message>
-        <source>Colors explorer</source>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To top</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70,6 +78,10 @@
     </message>
     <message>
         <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

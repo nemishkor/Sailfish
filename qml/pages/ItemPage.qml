@@ -155,6 +155,7 @@ Page {
                     if(randomAction == 1){ // if open next color in history or search random
                         currentRandomHistoryIndex++
                     }
+                    searchFavorites()
                 }
             }
         }
@@ -200,10 +201,10 @@ Page {
 
     function initDb() {
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000);
-
         db.transaction(
             function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)')
+                tx.executeSql("CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)")
+                tx.executeSql("CREATE TABLE IF NOT EXISTS Favorites(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)")
             }
         )
     }
@@ -213,8 +214,51 @@ Page {
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000);
         db.transaction(
             function(tx) {
-                console.log("INSERT INTO History VALUES(null, '" + newType + "','" + newId + "')")
+                tx.executeSql("CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)")
                 tx.executeSql("INSERT INTO History VALUES(null, '" + newType + "','" + newId + "')");
+            }
+        )
+    }
+
+    function setFavorites(checked) {
+        var identifier
+        if(type == "lovers")
+            identifier = userName
+        else
+            if(type == "palettes" || type == "patterns")
+                identifier = id
+            else // else colors
+                identifier = hex
+        console.log('setFavorites(' + type + ', ' + identifier + ', ' + checked + ')')
+        var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
+        db.transaction(
+            function(tx) {
+                if(checked === 1)
+                    tx.executeSql("INSERT INTO Favorites VALUES(null, '" + type + "','" + identifier + "')")
+                else
+                    tx.executeSql("DELETE FROM Favorites WHERE identifier='" + identifier + "' AND type='" + type + "'")
+            }
+        )
+    }
+
+    function searchFavorites() {
+        var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
+        db.transaction(
+            function(tx) {
+                var identifier
+                if(type == "lovers")
+                    identifier = userName
+                else
+                    if(type == "palettes" || type == "patterns")
+                        identifier = id
+                    else // else colors
+                        identifier = hex
+                tx.executeSql("CREATE TABLE IF NOT EXISTS Favorites(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)")
+                var rs = tx.executeSql("SELECT * FROM Favorites WHERE identifier='" + identifier + "'")
+                if(rs.rows.length > 0)
+                    favIcon.chacked = 1
+                else
+                    favIcon.chacked = 0
             }
         )
     }
@@ -226,14 +270,17 @@ Page {
         if(category == "Random"){
             randomAction = 0
             loadXml()
-        } else if(addToHistory) {
-            if(type == "lovers")
-                addRow(type, userName)
-            else
-                if(type == "palettes" || type == "patterns")
-                    addRow(type, id)
-                else // else colors
-                    addRow(type, hex)
+        } else {
+            searchFavorites()
+            if(addToHistory) {
+                if(type == "lovers")
+                    addRow(type, userName)
+                else
+                    if(type == "palettes" || type == "patterns")
+                        addRow(type, id)
+                    else // else colors
+                        addRow(type, hex)
+            }
         }
         console.log('type=' + type + ' category=' + category)
     }
@@ -277,8 +324,28 @@ Page {
             spacing: Theme.paddingMedium
             anchors.bottomMargin: Theme.paddingLarge
             PageHeader {
+                anchors.rightMargin: favIcon.width + Theme.paddingSmall
+                anchors.right: parent.right
                 id: columnTitle
                 title: tittle
+                IconButton {
+                    id: favIcon
+                    anchors.left: parent.right
+                    anchors.leftMargin: Theme.paddingSmall
+                    width: 80
+                    height: 80
+                    anchors.verticalCenter: parent.verticalCenter
+                    icon.source: (chacked == 0) ? "image://theme/icon-m-favorite" : "image://theme/icon-m-favorite-selected"
+                    property int chacked: -1; // when searching in local base -1
+                    visible: (chacked != -1) ? true : false
+                    onClicked: {
+                        if(chacked == 0)
+                            chacked++
+                        else
+                            chacked--
+                        setFavorites(chacked)
+                    }
+                }
             }
             Item{
                 visible: (category == "Random") ? true : false
@@ -551,7 +618,12 @@ Page {
 //                    text: qsTr("Send")
 //                }
 //            }
-            Label{ width: parent.width - 2 * Theme.paddingMedium; x: Theme.paddingMedium; text: "User name: " + userName }
+            Label{
+                id: userNameLbl
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                text: "User name: " + userName
+            }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
@@ -823,6 +895,7 @@ Page {
                 text: "Created: " + dateCreated
             }
             Label{
+                id: idLbl
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
                 text: "id: " + id

@@ -53,5 +53,6 @@ RESOURCES += \
 HEADERS +=
 
 DISTFILES += \
-    qml/pages/HistoryPage.qml
+    qml/pages/HistoryPage.qml \
+    qml/pages/FavoritesPage.qml
 

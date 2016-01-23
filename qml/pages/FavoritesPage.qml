@@ -16,7 +16,7 @@ Page{
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
         db.transaction(
             function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)')
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Favorites(id INTEGER PRIMARY KEY, type TEXT, identifier TEXT)')
             }
         )
 
@@ -28,7 +28,7 @@ Page{
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
         db.transaction(
             function(tx) {
-                var rs = tx.executeSql('SELECT * FROM History Orders ORDER BY id DESC LIMIT ' + limit + ' OFFSET ' + offset)
+                var rs = tx.executeSql('SELECT * FROM Favorites Orders ORDER BY id DESC LIMIT ' + limit + ' OFFSET ' + offset)
                 listModel.clear()
                 for(var i = 0; i < rs.rows.length; i++) {
                     var item = {
@@ -100,7 +100,7 @@ Page{
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
         db.transaction(
             function(tx) {
-                var rs = tx.executeSql('DELETE FROM History')
+                var rs = tx.executeSql('DELETE FROM Favorites')
             }
         )
         getText()
@@ -261,12 +261,12 @@ Page{
         height: parent.height
         header: PageHeader {
             id: header
-            title: "History"
+            title: "Favorites"
         }
         model : listModel
         delegate: BackgroundItem {
             width: parent.width
-            height: typeLbl.height * 3
+            height: 100
             Image{
                 visible: (type === 'lovers') ? false : true
                 id: image
@@ -363,7 +363,7 @@ Page{
             id: pullDownMenu
             MenuItem{
                 text: qsTr("Clear")
-                onClicked: remorse.execute("Clearing history", clearDb )
+                onClicked: remorse.execute("Deleting", clearDb )
                 RemorsePopup { id: remorse }
             }
         }
@@ -391,7 +391,7 @@ Page{
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.highlightColor
-            text: "There wil be your\nlocal history.\nNow here is empty"
+            text: "There wil be your\nfavorites.\nNow here is empty"
         }
 
         TouchInteractionHint {

@@ -32,6 +32,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
 import QtQuick.LocalStorage 2.0
+import ImageGenerator 1.0
 
 Page {
     id: page
@@ -308,7 +309,17 @@ Page {
         anchors.fill: parent
         contentHeight: column.height
 
+        ImageGenerator{
+            id: imageGenerator
+        }
+
         PullDownMenu{
+            MenuItem {
+                text: qsTr("Download image to phone")
+                onClicked: {
+                    imageGenerator.saveImage(imageUrl)
+                }
+            }
             MenuItem {
                 text: qsTr("View original link")
                 onClicked: {

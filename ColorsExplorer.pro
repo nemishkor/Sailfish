@@ -14,7 +14,9 @@ TARGET = ColorsExplorer
 
 CONFIG += sailfishapp
 
-SOURCES += src/ColorsExplorer.cpp
+SOURCES += src/ColorsExplorer.cpp \
+    filedownloader.cpp \
+    imagegenerator.cpp
 
 OTHER_FILES += qml/ColorsExplorer.qml \
     qml/cover/CoverPage.qml \
@@ -50,9 +52,14 @@ TRANSLATIONS += translations/ColorsExplorer-de.ts
 RESOURCES += \
     icons.qrc
 
-HEADERS +=
+QT += network
+
+HEADERS += \
+    filedownloader.h \
+    imagegenerator.h
 
 DISTFILES += \
     qml/pages/HistoryPage.qml \
-    qml/pages/FavoritesPage.qml
+    qml/pages/FavoritesPage.qml \
+    qml/dialogs/RangeDialog.qml
 

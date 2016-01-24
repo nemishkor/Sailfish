@@ -23,7 +23,6 @@ Page{
     }
 
     function getText(){
-        pullDownMenu.visible = false
         pushUpMenu.visible = false
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
         db.transaction(
@@ -139,7 +138,7 @@ Page{
 
     function loadMore(){
         listView.scrollToTop()
-        currentIndex = 0
+        currentIndex = -1
         offset += limit
         getText()
     }

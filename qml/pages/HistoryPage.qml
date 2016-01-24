@@ -23,7 +23,6 @@ Page{
     }
 
     function getText(){
-        pullDownMenu.visible = false
         pushUpMenu.visible = false
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000)
         db.transaction(
@@ -103,6 +102,7 @@ Page{
                 var rs = tx.executeSql('DELETE FROM History')
             }
         )
+        listModel.clear()
         getText()
     }
 
@@ -110,36 +110,38 @@ Page{
         console.log("next()")
         console.log('currentIndex=' + currentIndex)
         console.log('limit=' + limit)
-        if(currentIndex === limit){
-            loadMore()
-        } else {
-            currentIndex++
-            console.log('list.type=' + listModel.get(currentIndex).type)
-            console.log('list.hex=' + listModel.get(currentIndex).hex)
-            if(listModel.get(currentIndex).type === 'colors'){
-                currentType = 'color'
-                currentId = listModel.get(currentIndex).hex
+        if(listModel.count > 0){
+            if(currentIndex === limit){
+                loadMore()
+            } else {
+                currentIndex++
+                console.log('list.type=' + listModel.get(currentIndex).type)
+                console.log('list.hex=' + listModel.get(currentIndex).hex)
+                if(listModel.get(currentIndex).type === 'colors'){
+                    currentType = 'color'
+                    currentId = listModel.get(currentIndex).hex
+                }
+                if(listModel.get(currentIndex).type === 'lovers'){
+                    currentType = 'lover';
+                    currentId = listModel.get(currentIndex).userName
+                }
+                if(listModel.get(currentIndex).type === 'patterns'){
+                    currentType = 'pattern';
+                    currentId = listModel.get(currentIndex).identifier
+                }
+                if(listModel.get(currentIndex).type === 'palettes'){
+                    currentType = 'palette';
+                    currentId = listModel.get(currentIndex).identifier
+                }
+                console.log('currentIndex=' + currentIndex + ' currentType=' + currentType + ' currentId=' + currentId)
+                loadXml()
             }
-            if(listModel.get(currentIndex).type === 'lovers'){
-                currentType = 'lover';
-                currentId = listModel.get(currentIndex).userName
-            }
-            if(listModel.get(currentIndex).type === 'patterns'){
-                currentType = 'pattern';
-                currentId = listModel.get(currentIndex).identifier
-            }
-            if(listModel.get(currentIndex).type === 'palettes'){
-                currentType = 'palette';
-                currentId = listModel.get(currentIndex).identifier
-            }
-            console.log('currentIndex=' + currentIndex + ' currentType=' + currentType + ' currentId=' + currentId)
-            loadXml()
         }
     }
 
     function loadMore(){
         listView.scrollToTop()
-        currentIndex = 0
+        currentIndex = -1
         offset += limit
         getText()
     }
@@ -244,10 +246,9 @@ Page{
                                       numLovers: xmlModel.get(0).numLovers,
                                       numCommentsOnProfile: xmlModel.get(0).numCommentsOnProfile
                                   })
-                    if(currentIndex + 1 != listModel.count){ // when not all items loaded
+                    if(currentIndex + 1 < listModel.count){ // when not all items loaded
                         next()
                     } else { // when all items loaded
-                        pullDownMenu.visible = true
                         pushUpMenu.visible = true
                     }
                 }
@@ -262,6 +263,16 @@ Page{
         header: PageHeader {
             id: header
             title: qsTr("History")
+        }
+        PullDownMenu{
+            id: pullDownMenu
+            MenuItem{
+                text: qsTr("Clear")
+                onClicked: {
+                    remorse.execute("Clearing history", clearDb )
+                }
+                RemorsePopup { id: remorse }
+            }
         }
         model : listModel
         delegate: BackgroundItem {
@@ -359,14 +370,6 @@ Page{
             }
         }
         VerticalScrollDecorator {}
-        PullDownMenu{
-            id: pullDownMenu
-            MenuItem{
-                text: qsTr("Clear")
-                onClicked: remorse.execute("Clearing history", clearDb )
-                RemorsePopup { id: remorse }
-            }
-        }
         PushUpMenu{
             id: pushUpMenu
             MenuItem {

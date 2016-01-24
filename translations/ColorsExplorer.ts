@@ -138,117 +138,131 @@ Now here is empty</source>
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="226"/>
+        <location filename="../qml/pages/FirstPage.qml" line="225"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="230"/>
+        <location filename="../qml/pages/FirstPage.qml" line="229"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="234"/>
+        <location filename="../qml/pages/FirstPage.qml" line="233"/>
         <source>Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="244"/>
+        <location filename="../qml/pages/FirstPage.qml" line="243"/>
         <source>Colors explorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="257"/>
+        <location filename="../qml/pages/FirstPage.qml" line="256"/>
         <source>Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="272"/>
+        <location filename="../qml/pages/FirstPage.qml" line="271"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="278"/>
-        <location filename="../qml/pages/FirstPage.qml" line="328"/>
-        <location filename="../qml/pages/FirstPage.qml" line="380"/>
-        <location filename="../qml/pages/FirstPage.qml" line="422"/>
+        <location filename="../qml/pages/FirstPage.qml" line="277"/>
+        <location filename="../qml/pages/FirstPage.qml" line="327"/>
+        <location filename="../qml/pages/FirstPage.qml" line="379"/>
+        <location filename="../qml/pages/FirstPage.qml" line="421"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="288"/>
-        <location filename="../qml/pages/FirstPage.qml" line="339"/>
-        <location filename="../qml/pages/FirstPage.qml" line="391"/>
-        <location filename="../qml/pages/FirstPage.qml" line="432"/>
+        <location filename="../qml/pages/FirstPage.qml" line="287"/>
+        <location filename="../qml/pages/FirstPage.qml" line="338"/>
+        <location filename="../qml/pages/FirstPage.qml" line="390"/>
+        <location filename="../qml/pages/FirstPage.qml" line="431"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="298"/>
-        <location filename="../qml/pages/FirstPage.qml" line="350"/>
-        <location filename="../qml/pages/FirstPage.qml" line="402"/>
+        <location filename="../qml/pages/FirstPage.qml" line="297"/>
+        <location filename="../qml/pages/FirstPage.qml" line="349"/>
+        <location filename="../qml/pages/FirstPage.qml" line="401"/>
         <source>Random</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="322"/>
+        <location filename="../qml/pages/FirstPage.qml" line="321"/>
         <source>Palettes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="374"/>
+        <location filename="../qml/pages/FirstPage.qml" line="373"/>
         <source>Patterns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="416"/>
+        <location filename="../qml/pages/FirstPage.qml" line="415"/>
         <source>Lovers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="447"/>
+        <location filename="../qml/pages/FirstPage.qml" line="446"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="453"/>
+        <location filename="../qml/pages/FirstPage.qml" line="452"/>
         <source>Color selector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="530"/>
+        <location filename="../qml/pages/FirstPage.qml" line="120"/>
+        <location filename="../qml/pages/FirstPage.qml" line="529"/>
         <source>Last
 viewed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="611"/>
+        <location filename="../qml/pages/FirstPage.qml" line="124"/>
+        <location filename="../qml/pages/FirstPage.qml" line="610"/>
         <source>Last
 favorite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="632"/>
+        <location filename="../qml/pages/FirstPage.qml" line="130"/>
+        <source>
+History is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="134"/>
+        <source>
+Favorites is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="631"/>
         <source>Stats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="637"/>
+        <location filename="../qml/pages/FirstPage.qml" line="636"/>
         <source>Total colors: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="644"/>
+        <location filename="../qml/pages/FirstPage.qml" line="643"/>
         <source>Total palettes: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="651"/>
+        <location filename="../qml/pages/FirstPage.qml" line="650"/>
         <source>Total patterns: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="658"/>
+        <location filename="../qml/pages/FirstPage.qml" line="657"/>
         <source>Total lovers: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,34 +270,34 @@ favorite</source>
 <context>
     <name>HistoryPage</name>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="264"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="265"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="365"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="270"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="373"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="376"/>
         <source>Load more</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="377"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="380"/>
         <source>To top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="394"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="397"/>
         <source>There wil be your
 local history.
 Now here is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HistoryPage.qml" line="407"/>
+        <location filename="../qml/pages/HistoryPage.qml" line="410"/>
         <source>Flick right to return to explore</source>
         <translation type="unfinished"></translation>
     </message>

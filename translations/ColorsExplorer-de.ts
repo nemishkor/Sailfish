@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<TS version="2.0" language="de" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -55,57 +55,15 @@
     <name>FavoritesPage</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished">Favoriten</translation>
-    </message>
-    <message>
-        <source>UserName: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VIEW </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VIEWS </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LOVE </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LOVES </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Favoriten</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="obsolete">laden Sie mehr</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
-    </message>
-    <message>
-        <source>There wil be your
-favorites.
-Now here is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Nach oben</translation>
     </message>
 </context>
 <context>
@@ -198,34 +156,74 @@ Favorit</translation>
         <source>Total lovers: </source>
         <translation>Gesamt lovers:</translation>
     </message>
+    <message>
+        <source>
+History is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Favorites is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New palettes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top palettes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New lovers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top lovers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryPage</name>
     <message>
         <source>History</source>
-        <translation type="unfinished">Geschichte</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Geschichte</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="obsolete">laden Sie mehr</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
-    </message>
-    <message>
-        <source>There wil be your
-local history.
-Now here is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Nach oben</translation>
     </message>
 </context>
 <context>

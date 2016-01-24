@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en">
+<TS version="2.0" language="ru" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -55,57 +55,15 @@
     <name>FavoritesPage</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished">Избранные</translation>
-    </message>
-    <message>
-        <source>UserName: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VIEW </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VIEWS </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LOVE </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LOVES </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Избранные</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">Загрузить больше</translation>
+        <translation type="obsolete">Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Вверх</translation>
-    </message>
-    <message>
-        <source>There wil be your
-favorites.
-Now here is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Вверх</translation>
     </message>
 </context>
 <context>
@@ -198,34 +156,76 @@ favorite</source>
         <source>Total lovers: </source>
         <translation>Всего любителей:</translation>
     </message>
+    <message>
+        <source>
+History is empty</source>
+        <translation>
+История пуста</translation>
+    </message>
+    <message>
+        <source>
+Favorites is empty</source>
+        <translation>
+В избранных пусто</translation>
+    </message>
+    <message>
+        <source>New colors</source>
+        <translation>Новые цвета</translation>
+    </message>
+    <message>
+        <source>Top colors</source>
+        <translation>Лучшие цвета</translation>
+    </message>
+    <message>
+        <source>Random color</source>
+        <translation>Случайный цвет</translation>
+    </message>
+    <message>
+        <source>New palettes</source>
+        <translation>Новые палитры</translation>
+    </message>
+    <message>
+        <source>Top palettes</source>
+        <translation>Лучшие палитры</translation>
+    </message>
+    <message>
+        <source>Random palette</source>
+        <translation>Случайная палитра</translation>
+    </message>
+    <message>
+        <source>New patterns</source>
+        <translation>Новые узоры</translation>
+    </message>
+    <message>
+        <source>Top patterns</source>
+        <translation>Лучшие узоры</translation>
+    </message>
+    <message>
+        <source>Random pattern</source>
+        <translation>Случайный узор</translation>
+    </message>
+    <message>
+        <source>New lovers</source>
+        <translation>Новые любители</translation>
+    </message>
+    <message>
+        <source>Top lovers</source>
+        <translation>Лучшие любители</translation>
+    </message>
 </context>
 <context>
     <name>HistoryPage</name>
     <message>
         <source>History</source>
-        <translation type="unfinished">История</translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">История</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">Загрузить больше</translation>
+        <translation type="obsolete">Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Вверх</translation>
-    </message>
-    <message>
-        <source>There wil be your
-local history.
-Now here is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Вверх</translation>
     </message>
 </context>
 <context>

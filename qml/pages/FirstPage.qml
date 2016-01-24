@@ -279,8 +279,8 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
-                                               category: text,
-                                               titlePage: "New colors", })
+                                               category: "New",
+                                               titlePage: qsTr("New colors"), })
                         }
                     }
                     MenuItem {
@@ -289,8 +289,8 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
-                                               category: text,
-                                               titlePage: "Top colors", })
+                                               category: "Top",
+                                               titlePage: qsTr("Top colors"), })
                         }
                     }
                     MenuItem {
@@ -299,8 +299,8 @@ Page {
                             pageStack.push("ItemPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
-                                               category: text,
-                                               titlePage: "Random color", })
+                                               category: "Random",
+                                               titlePage: qsTr("Random color"), })
                         }
                     }
                 }
@@ -330,8 +330,8 @@ Page {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
-                                               category: text,
-                                               titlePage: "New palettes", })
+                                               category: "New",
+                                               titlePage: qsTr("New palettes"), })
                         }
                     }
                     MenuItem {
@@ -341,8 +341,8 @@ Page {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
-                                               category: text,
-                                               titlePage: "Top palettes", })
+                                               category: "Top",
+                                               titlePage: qsTr("Top palettes"), })
                         }
                     }
                     MenuItem {
@@ -351,8 +351,8 @@ Page {
                             pageStack.push("ItemPage.qml", {
                                                type: "palettes",
                                                path: "/palettes/palette",
-                                               category: text,
-                                               titlePage: "Random palette", })
+                                               category: "Random",
+                                               titlePage: qsTr("Random palette"), })
                         }
                     }
                 }
@@ -382,8 +382,8 @@ Page {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
-                                               category: text,
-                                               titlePage: "New patterns", })
+                                               category: "New",
+                                               titlePage: qsTr("New patterns"), })
                         }
                     }
                     MenuItem {
@@ -393,8 +393,8 @@ Page {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
-                                               category: text,
-                                               titlePage: "Top patterns", })
+                                               category: "Top",
+                                               titlePage: qsTr("Top patterns"), })
                         }
                     }
                     MenuItem {
@@ -403,8 +403,8 @@ Page {
                             pageStack.push("ItemPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
-                                               category: text,
-                                               titlePage: "Random pattern", })
+                                               category: "Random",
+                                               titlePage: qsTr("Random pattern"), })
                         }
                     }
                 }
@@ -423,8 +423,8 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "lovers",
                                                path: "/lovers/lover",
-                                               category: text,
-                                               titlePage: "New lovers", })
+                                               category: "New",
+                                               titlePage: qsTr("New lovers"), })
                         }
                     }
                     MenuItem {
@@ -433,8 +433,8 @@ Page {
                             pageStack.push("ListPage.qml", {
                                                type: "lovers",
                                                path: "/lovers/lover",
-                                               category: text,
-                                               titlePage: "Top lovers", })
+                                               category: "Top",
+                                               titlePage: qsTr("Top lovers"), })
                         }
                     }
                 }

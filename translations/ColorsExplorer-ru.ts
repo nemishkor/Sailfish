@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>You can email me suggestions or comments by e-mail: nemish94@gmail.com</source>
-        <translation>Вы можете по электронной почте мне предложения или замечания по электронной почте: nemish94@gmail.com</translation>
+        <translation>Свои предложения или замечания Вы можете прислать мне по электронной почте: nemish94@gmail.com</translation>
     </message>
     <message>
         <source>Copy e-mail to clipboard </source>

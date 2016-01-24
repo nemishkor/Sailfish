@@ -36,6 +36,7 @@ import ImageGenerator 1.0
 
 Page {
     id: page
+
     property int id; // its id for search via api for palettes and patterns
     property string tittle;
     property string userName; // its id for search via api for lovers only
@@ -315,9 +316,9 @@ Page {
 
         PullDownMenu{
             MenuItem {
-                text: qsTr("Download image to phone")
+                text: qsTr("Save to gallery")
                 onClicked: {
-                    imageGenerator.saveImage(imageUrl)
+                    imageGenerator.saveImage(imageUrl, tittle, page.width, page.height)
                 }
             }
             MenuItem {
@@ -381,7 +382,7 @@ Page {
                 }
                 Button{
                     id: btnReload
-                    text: "Next random"
+                    text: qsTr("Next random")
                     onClicked: {
                         loadingModel.visible = true
                         randomAction = 0
@@ -433,7 +434,7 @@ Page {
                 width: parent.width
                 menu: ContextMenu {
                     MenuItem {
-                        text: "tile"
+                        text: qsTr("tile")
                         onClicked: {
                             mainImage.fillMode = Image.Tile
                             mainImage.width = mainImage.parent.width
@@ -442,7 +443,7 @@ Page {
                         }
                     }
                     MenuItem {
-                        text: "original"
+                        text: qsTr("original")
                         onClicked: {
                             mainImage.fillMode = Image.PreserveAspectFit
                             mainImage.width = mainImage.sourceSize.width
@@ -450,7 +451,7 @@ Page {
                             imageFillMode.source = "qrc:/iconPrefix/original.png" }
                     }
                     MenuItem {
-                        text: "fill"
+                        text: qsTr("fill")
                         onClicked: {
                             mainImage.fillMode = Image.PreserveAspectFit
                             mainImage.width = mainImage.parent.width
@@ -501,7 +502,7 @@ Page {
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width
-                        text: "Hearts"
+                        text: qsTr("Hearts")
                     }
                 }
                 Rectangle{
@@ -539,7 +540,7 @@ Page {
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width
-                        text: "Votes"
+                        text: qsTr("Votes")
                     }
                 }
                 Rectangle{
@@ -577,7 +578,7 @@ Page {
                         font.pixelSize: 18
                         width: parent.width
                         horizontalAlignment: Text.AlignHCenter
-                        text: "Views"
+                        text: qsTr("Views")
                     }
                 }
                 Rectangle{
@@ -614,7 +615,7 @@ Page {
                         font.pixelSize: 18
                         width: parent.width
                         horizontalAlignment: Text.AlignHCenter
-                        text: "Comments"
+                        text: qsTr("Comments")
                     }
                 }
             }
@@ -633,12 +634,12 @@ Page {
                 id: userNameLbl
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
-                text: "User name: " + userName
+                text: qsTr("User name: ") + userName
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Description: " + description
+                text: qsTr("Description: ") + description
                 horizontalAlignment: Text.AlignLeft
                 //truncationMode: TruncationMode.Fade
                 color: Theme.secondaryHighlightColor
@@ -798,7 +799,7 @@ Page {
                             anchors.horizontalCenter: parent.horizontalCenter
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
-                            text: "hue " + hue
+                            text: qsTr("hue ") + hue
                             anchors.leftMargin: (hue < 50) ? (hue + 50) : 0
                             color: (hue < 50) ? "white" : "black"
                         }
@@ -841,7 +842,7 @@ Page {
                             horizontalAlignment: Text.AlignHCenter
                             anchors.leftMargin: (saturation < 25) ? (saturation + 25) : 0
                             color: (saturation < 25) ? "white" : "black"
-                            text: "saturation " + saturation
+                            text: qsTr("saturation ") + saturation
                         }
                     }
                 }
@@ -883,7 +884,7 @@ Page {
                             horizontalAlignment: Text.AlignHCenter
                             //anchors.leftMargin: (value < 50) ? (value + 50) : 0
                             color: (value < 50) ? "white" : "black"
-                            text: "value " + value
+                            text: qsTr("value ") + value
                         }
                     }
                 }
@@ -898,18 +899,18 @@ Page {
                 visible: (type == "colors") ? true : false
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "hex: #" + hex
+                text: qsTr("hex: #") + hex
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
-                text: "Created: " + dateCreated
+                text: qsTr("Created: ") + dateCreated
             }
             Label{
                 id: idLbl
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
-                text: "id: " + id
+                text: qsTr("id: ") + id
             }
 
             /*
@@ -959,47 +960,47 @@ Page {
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Date registered: " + dateRegistered
+                text: qsTr("Date registered: ") + dateRegistered
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Date last active: " + dateLastActive
+                text: qsTr("Date last active: ") + dateLastActive
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Rating: " + rating
+                text: qsTr("Rating: ") + rating
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num colors: " + numColors
+                text: qsTr("Num colors: ") + numColors
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num palettes: " + numPalettes
+                text: qsTr("Num palettes: ") + numPalettes
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num patterns: " + numPatterns
+                text: qsTr("Num patterns: ") + numPatterns
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num comments made: " + numCommentsMade
+                text: qsTr("Num comments made: ") + numCommentsMade
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num lovers: " + numLovers
+                text: qsTr("Num lovers: ") + numLovers
             }
             Label{
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: "Num comments on profile: " + numCommentsOnProfile
+                text: qsTr("Num comments on profile: ") + numCommentsOnProfile
             }
         }
 

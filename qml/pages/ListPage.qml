@@ -36,11 +36,16 @@ import QtGraphicalEffects 1.0
 Page {
     id: page
 
+    property bool innactive: false;
+
     onStatusChanged: {
-        console.log("status " + status);
-        if (status == 0)
-            if(page == pageStack.currentPage)
-                console.log("PageStack.back");
+        if (status == 0){
+            innactive = true
+        }
+        if(innactive && status === 2){
+            console.log("PageStack.back2")
+            innactive = false
+        }
     }
 
     XmlListModel{
@@ -119,7 +124,7 @@ Page {
         }
     }
 
-    property string title;
+    property string titlePage;
 
     property string type;
     property string category;
@@ -128,8 +133,16 @@ Page {
     property int resultOffset: 0;
     property string dataURI;
 
+    // filters
+    property int hueMin: 0
+    property int hueMax: 359
+    property int briMin: 0
+    property int briMax: 99
+
     function loadXml(){
-        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=20" + "&resultOffset=" + resultOffset
+        listModel.xml = ""
+        listModel.reload()
+        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=20" + "&resultOffset=" + resultOffset + "&hueRange=" + hueMin + "," + hueMax + "&briRange=" + briMin + "," + briMax
         console.log(dataURI)
         var req = new XMLHttpRequest()
         req.open("get", dataURI)
@@ -190,8 +203,30 @@ Page {
         height: parent.height
         header: PageHeader {
             id: header
-            title: qsTr(title)
+            title: titlePage
+
+            IconButton {
+                icon.source: 'image://theme/icon-m-search'
+                onClicked: {
+                    var dialog = pageStack.push("../dialogs/RangeDialog.qml", {hueMin: hueMin, hueMax: hueMax, briMin: briMin, briMax: briMax,})
+                    dialog.accepted.connect(function() {
+                        var reload = false
+                        if(hueMin !== dialog.hueMin || hueMax !== dialog.hueMax || briMin !== dialog.briMin || briMax !== dialog.briMax)
+                            reload = true
+                        hueMin = dialog.hueMin
+                        hueMax = dialog.hueMax
+                        briMin = dialog.briMin
+                        briMax = dialog.briMax
+                        if(reload)
+                            loadXml()
+                    })
+                }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: parent.width / 2 - 40
+            }
         }
+
         model : listModel
         delegate: BackgroundItem {
             width: parent.width

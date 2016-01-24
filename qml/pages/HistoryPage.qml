@@ -261,7 +261,7 @@ Page{
         height: parent.height
         header: PageHeader {
             id: header
-            title: "History"
+            title: qsTr("History")
         }
         model : listModel
         delegate: BackgroundItem {
@@ -391,7 +391,7 @@ Page{
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.highlightColor
-            text: "There wil be your\nlocal history.\nNow here is empty"
+            text: qsTr("There wil be your\nlocal history.\nNow here is empty")
         }
 
         TouchInteractionHint {
@@ -404,7 +404,7 @@ Page{
         id: hintLbl
         visible: false
         anchors.bottom: parent.bottom
-        text: "Flick right to return to explore"
+        text: qsTr("Flick right to return to explore")
     }
 
 }

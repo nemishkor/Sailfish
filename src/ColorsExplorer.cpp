@@ -33,6 +33,7 @@
 #endif
 #include <QtQml>
 #include <sailfishapp.h>
+#include "imagegenerator.h"
 
 
 int main(int argc, char *argv[])
@@ -46,5 +47,8 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
+
+    qmlRegisterType<ImageGenerator>("ImageGenerator", 1, 0, "ImageGenerator");
+
     return SailfishApp::main(argc, argv);
 }

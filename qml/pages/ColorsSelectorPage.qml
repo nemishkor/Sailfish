@@ -13,7 +13,7 @@ Page {
 
         PageHeader{
             id: header
-            title: "Color picker"
+            title: qsTr("Color picker")
         }
 
         Column{
@@ -25,7 +25,7 @@ Page {
 
             Label{
                 x: Theme.paddingMedium
-                text: qsTr("Choised color")
+                text: qsTr("Color selected")
                 Rectangle {
                     anchors.left: parent.right
                     width: column.width - parent.width - 3 * Theme.paddingMedium; height: parent.height
@@ -34,12 +34,6 @@ Page {
                     border.width: 1; border.color: "black"
                     anchors.top: parent.top
                     color: colorPicker.colorValue
-                    //Checkerboard { cellSide: 5 }
-//                    Rectangle {
-//                        width: 500; height: 30
-//                        border.width: 1; border.color: "black"
-//                        color: colorPicker.colorValue
-//                    }
                 }
             }
 
@@ -146,7 +140,7 @@ Page {
             }
 
             Label{
-                text: qsTr("form 0 to 360")
+                text: qsTr("from 0 to 360")
                 font.pixelSize: Theme.fontSizeExtraSmall
                 x: Theme.paddingMedium
             }
@@ -157,7 +151,7 @@ Page {
             }
 
             Label{
-                text: qsTr("form 0 to 100")
+                text: qsTr("from 0 to 100")
                 font.pixelSize: Theme.fontSizeExtraSmall
                 x: Theme.paddingMedium
             }
@@ -168,7 +162,7 @@ Page {
             }
 
             Label{
-                text: qsTr("form 0 to 100")
+                text: qsTr("from 0 to 100")
                 font.pixelSize: Theme.fontSizeExtraSmall
                 x: Theme.paddingMedium
             }
@@ -179,7 +173,7 @@ Page {
             }
 
             Label{
-                text: qsTr("form 0 to 100")
+                text: qsTr("from 0 to 100")
                 font.pixelSize: Theme.fontSizeExtraSmall
                 x: Theme.paddingMedium
             }
@@ -188,12 +182,12 @@ Page {
             TextField {
                 width: parent.width
                 label: "Hex"
-                placeholderText: "Type here"
+                placeholderText: qsTr("Type here")
                 maximumLength: 9
                 horizontalAlignment: TextInput.AlignLeft
                 text: ColorUtils.fullColorString(colorPicker.colorValue, alphaSlider.value)
                 EnterKey.onClicked: {
-                    text = "Return key pressed";
+                    text = qsTr("Return key pressed");
                     parent.focus = true;
                 }
             }

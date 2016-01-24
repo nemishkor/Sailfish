@@ -261,12 +261,12 @@ Page{
         height: parent.height
         header: PageHeader {
             id: header
-            title: "Favorites"
+            title: qsTr("Favorites")
         }
         model : listModel
         delegate: BackgroundItem {
             width: parent.width
-            height: 100
+            height: typeLbl.height * 3
             Image{
                 visible: (type === 'lovers') ? false : true
                 id: image
@@ -299,21 +299,21 @@ Page{
                         x: Theme.horizontalPageMargin
                         color: "#ffffff"
                         font.pixelSize: Theme.fontSizeExtraSmall
-                        text: (type === 'lovers') ? 'UserName: ' + model.userName : 'Name: ' + model.title
+                        text: (type === 'lovers') ? qsTr('UserName: ') + model.userName : qsTr('Name: ') + model.title
                     }
                     Label{
                         visible: (type === 'lovers') ? false : true
                         x: Theme.horizontalPageMargin
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: "#eeeeee"
-                        text: (numViews == 1) ? "VIEW " + numViews : "VIEWS " + numViews
+                        text: (numViews == 1) ? qsTr("VIEW ") + numViews : qsTr("VIEWS ") + numViews
                     }
                     Label{
                         visible: (type === 'lovers') ? false : true
                         x: Theme.horizontalPageMargin
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: "#eeeeee"
-                        text: (numHearts == 1) ? "LOVE " + numHearts : "LOVES " + numHearts
+                        text: (numHearts == 1) ? qsTr("LOVE ") + numHearts : qsTr("LOVES ") + numHearts
                     }
                 }
                 MouseArea{
@@ -363,7 +363,7 @@ Page{
             id: pullDownMenu
             MenuItem{
                 text: qsTr("Clear")
-                onClicked: remorse.execute("Deleting", clearDb )
+                onClicked: remorse.execute(qsTr("Deleting"), clearDb )
                 RemorsePopup { id: remorse }
             }
         }
@@ -391,7 +391,7 @@ Page{
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.highlightColor
-            text: "There wil be your\nfavorites.\nNow here is empty"
+            text: qsTr("There wil be your\nfavorites.\nNow here is empty")
         }
 
         TouchInteractionHint {
@@ -404,7 +404,7 @@ Page{
         id: hintLbl
         visible: false
         anchors.bottom: parent.bottom
-        text: "Flick right to return to explore"
+        text: qsTr("Flick right to return to explore")
     }
 
 }

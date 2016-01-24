@@ -40,8 +40,30 @@ Page {
             }
 
             Button{
-                text: "Copy e-mail to clipboard "
+                text: qsTr("Copy e-mail to clipboard ")
                 onClicked: { mail.setClipboard("nemish94@gmail.com")  }
+            }
+
+            SectionHeader{
+                text: 'ChangeLog'
+            }
+
+            Label{
+                text: '\tv.0.7\n' +
+                      'added auto Deutsch translation\n' +
+                      'added Russian\n' +
+                      '\tv.0.6\n' +
+                      'about page fix\n' +
+                      'added favorites\n' +
+                      'changed main page\n' +
+                      'changed cover\n' +
+                      'some fixes with history\n' +
+                      'added download option' +
+                      '\tv.0.3-4\n' +
+                      'added global history\n' +
+                      'added lovers page\n' +
+                      'added statistics' +
+                      'other fixes'
             }
 
         }

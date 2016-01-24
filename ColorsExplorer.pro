@@ -15,8 +15,10 @@ TARGET = ColorsExplorer
 CONFIG += sailfishapp
 
 SOURCES += src/ColorsExplorer.cpp \
-    filedownloader.cpp \
-    imagegenerator.cpp
+    src/clipboard.cpp \
+    src/filedownloader.cpp \
+    src/imagegenerator.cpp \
+    src/utils.cpp
 
 OTHER_FILES += qml/ColorsExplorer.qml \
     qml/cover/CoverPage.qml \
@@ -43,11 +45,9 @@ OTHER_FILES += qml/ColorsExplorer.qml \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-# German translation is enabled as an example. If you aren't
-# planning to localize your app, remember to comment out the
-# following TRANSLATIONS line. And also do not forget to
-# modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/ColorsExplorer-de.ts
+TRANSLATIONS += translations/ColorsExplorer-it.ts
+TRANSLATIONS += translations/ColorsExplorer-ru.ts
 
 RESOURCES += \
     icons.qrc
@@ -55,8 +55,10 @@ RESOURCES += \
 QT += network
 
 HEADERS += \
-    filedownloader.h \
-    imagegenerator.h
+    src/clipboard.h \
+    src/filedownloader.h \
+    src/imagegenerator.h \
+    src/utils.h
 
 DISTFILES += \
     qml/pages/HistoryPage.qml \

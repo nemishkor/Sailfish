@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<TS version="2.1" language="ru" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>Etwa</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>Hello my friend =)</source>
-        <translation>Hallo mein Freund =)</translation>
+        <translation>Привет мой друг =)</translation>
     </message>
     <message>
         <source>You can email me suggestions or comments by e-mail: nemish94@gmail.com</source>
-        <translation>Sie können mich mailen Sie Anregungen oder Kommentare per E-Mail: nemish94@gmail.com</translation>
+        <translation>Вы можете по электронной почте мне предложения или замечания по электронной почте: nemish94@gmail.com</translation>
     </message>
     <message>
         <source>Copy e-mail to clipboard </source>
-        <translation>Kopieren Sie per E-Mail in die Zwischenablage kopieren</translation>
+        <translation>Скопировать в буфер обмена</translation>
     </message>
 </context>
 <context>
     <name>ColorsSelectorPage</name>
     <message>
         <source>Color picker</source>
-        <translation>Farbauswahl</translation>
+        <translation>Выбор цвета</translation>
     </message>
     <message>
         <source>Color selected</source>
-        <translation>Farbe ausgewählt</translation>
+        <translation>Цвет выбран</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Einzelheiten</translation>
+        <translation>Детали</translation>
     </message>
     <message>
         <source>from 0 to 360</source>
-        <translation>0-360</translation>
+        <translation>от 0 до 360</translation>
     </message>
     <message>
         <source>from 0 to 100</source>
-        <translation>0-100</translation>
+        <translation>от 0 до 100</translation>
     </message>
     <message>
         <source>Type here</source>
-        <translation>geben Sie hier</translation>
+        <translation>Введите здесь</translation>
     </message>
     <message>
         <source>Return key pressed</source>
-        <translation>Return-Taste gedrückt</translation>
+        <translation>Вернуться нажатии ключ</translation>
     </message>
 </context>
 <context>
     <name>FavoritesPage</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished">Favoriten</translation>
+        <translation type="unfinished">Избранные</translation>
     </message>
     <message>
         <source>UserName: </source>
@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="unfinished">Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
+        <translation type="unfinished">Вверх</translation>
     </message>
     <message>
         <source>There wil be your
@@ -112,98 +112,98 @@ Now here is empty</source>
     <name>FirstPage</name>
     <message>
         <source>About</source>
-        <translation>Etwa</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>History</source>
-        <translation>Geschichte</translation>
+        <translation>История</translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation>Favoriten</translation>
+        <translation>Избранные</translation>
     </message>
     <message>
         <source>Colors explorer</source>
-        <translation>Farbe explorer</translation>
+        <translation>Colors explorer</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation>Kategorien</translation>
+        <translation>Категории</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation>Farben</translation>
+        <translation>Цвета</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>neu</translation>
+        <translation>Новые</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation>Top</translation>
+        <translation>Топ</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation>Zufällig</translation>
+        <translation>Случайный</translation>
     </message>
     <message>
         <source>Palettes</source>
-        <translation>Palettes</translation>
+        <translation>Палитры</translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation>Patterns</translation>
+        <translation>Узоры</translation>
     </message>
     <message>
         <source>Lovers</source>
-        <translation>Lovers</translation>
+        <translation>Любители</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Tools</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>Color selector</source>
-        <translation>Farbauswahl</translation>
+        <translation>Селектор цвета</translation>
     </message>
     <message>
         <source>Last
 viewed</source>
-        <translation>Letzte
-angesehen</translation>
+        <translation>Последний
+просмотренный</translation>
     </message>
     <message>
         <source>Last
 favorite</source>
-        <translation>Letzte
-Favorit</translation>
+        <translation>Последний
+любимый</translation>
     </message>
     <message>
         <source>Stats</source>
-        <translation>Statistik</translation>
+        <translation>Статистика</translation>
     </message>
     <message>
         <source>Total colors: </source>
-        <translation>Gesamt Farben:</translation>
+        <translation>Всего цветов:</translation>
     </message>
     <message>
         <source>Total palettes: </source>
-        <translation>Anzahl Paletten:</translation>
+        <translation>Всего палитр:</translation>
     </message>
     <message>
         <source>Total patterns: </source>
-        <translation>Gesamtmuster:</translation>
+        <translation>Всего узоров:</translation>
     </message>
     <message>
         <source>Total lovers: </source>
-        <translation>Gesamt lovers:</translation>
+        <translation>Всего любителей:</translation>
     </message>
 </context>
 <context>
     <name>HistoryPage</name>
     <message>
         <source>History</source>
-        <translation type="unfinished">Geschichte</translation>
+        <translation type="unfinished">История</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -211,11 +211,11 @@ Favorit</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="unfinished">Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
+        <translation type="unfinished">Вверх</translation>
     </message>
     <message>
         <source>There wil be your
@@ -232,59 +232,59 @@ Now here is empty</source>
     <name>ItemPage</name>
     <message>
         <source>Loading</source>
-        <translation>Laden</translation>
+        <translation>загрузка</translation>
     </message>
     <message>
         <source>Save to gallery</source>
-        <translation>Sparen Sie zur Galerie</translation>
+        <translation>Сохранить в галерее</translation>
     </message>
     <message>
         <source>View original link</source>
-        <translation>Original-Link</translation>
+        <translation>Просмотреть оригинал ссылку</translation>
     </message>
     <message>
         <source>Next random</source>
-        <translation>nächste Zufalls</translation>
+        <translation>Следующая случайная</translation>
     </message>
     <message>
         <source>Image size: </source>
-        <translation>Bildgröße:</translation>
+        <translation>Размер изображения:</translation>
     </message>
     <message>
         <source>tile</source>
-        <translation>Fliese</translation>
+        <translation>плитка</translation>
     </message>
     <message>
         <source>original</source>
-        <translation>Original</translation>
+        <translation>оригинальный</translation>
     </message>
     <message>
         <source>fill</source>
-        <translation>füllen</translation>
+        <translation>заполнить</translation>
     </message>
     <message>
         <source>Hearts</source>
-        <translation>Hearts</translation>
+        <translation>Сердца</translation>
     </message>
     <message>
         <source>Votes</source>
-        <translation>Stimmen</translation>
+        <translation>Голосов</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Ansichten</translation>
+        <translation>Просмотры</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Bemerkungen</translation>
+        <translation>Комментарии</translation>
     </message>
     <message>
         <source>User name: </source>
-        <translation>Benutzername:</translation>
+        <translation>Имя пользователя:</translation>
     </message>
     <message>
         <source>Description: </source>
-        <translation>Beschreibung:</translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>RGB</source>
@@ -296,19 +296,19 @@ Now here is empty</source>
     </message>
     <message>
         <source>hue </source>
-        <translation>Farbton</translation>
+        <translation>оттенок</translation>
     </message>
     <message>
         <source>saturation </source>
-        <translation>Sättigung</translation>
+        <translation>насыщенность</translation>
     </message>
     <message>
         <source>value </source>
-        <translation>Wert</translation>
+        <translation>величина</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Einzelheiten</translation>
+        <translation>Детали</translation>
     </message>
     <message>
         <source>hex: #</source>
@@ -316,7 +316,7 @@ Now here is empty</source>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Erstellt:</translation>
+        <translation>Создано:</translation>
     </message>
     <message>
         <source>id: </source>
@@ -324,54 +324,54 @@ Now here is empty</source>
     </message>
     <message>
         <source>Date registered: </source>
-        <translation>Registrierungsdatum:</translation>
+        <translation>Дата регистрации:</translation>
     </message>
     <message>
         <source>Date last active: </source>
-        <translation>Datum Zuletzt aktiv:</translation>
+        <translation>Дата последней активности:</translation>
     </message>
     <message>
         <source>Rating: </source>
-        <translation>Bewertung:</translation>
+        <translation>Рейтинг:</translation>
     </message>
     <message>
         <source>Num colors: </source>
-        <translation>Num Farben:</translation>
+        <translation>Кол цветов:</translation>
     </message>
     <message>
         <source>Num palettes: </source>
-        <translation>Num Paletten:</translation>
+        <translation>Кол палитры:</translation>
     </message>
     <message>
         <source>Num patterns: </source>
-        <translation>Anzahl Muster:</translation>
+        <translation>Кол узоров:</translation>
     </message>
     <message>
         <source>Num comments made: </source>
-        <translation>Anzahl Kommentare:</translation>
+        <translation>Кол замечания:</translation>
     </message>
     <message>
         <source>Num lovers: </source>
-        <translation>Anzahl Liebhaber:</translation>
+        <translation>Кол любителей:</translation>
     </message>
     <message>
         <source>Num comments on profile: </source>
-        <translation>Anzahl kommentiert Profil:</translation>
+        <translation>Кол комментариев на странице профиля:</translation>
     </message>
 </context>
 <context>
     <name>ListPage</name>
     <message>
         <source>Loading</source>
-        <translation>Laden</translation>
+        <translation>загрузка</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation>laden Sie mehr</translation>
+        <translation>Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation>Nach oben</translation>
+        <translation>Вверх</translation>
     </message>
 </context>
 </TS>

@@ -39,7 +39,6 @@ import QtQuick.XmlListModel 2.0
 
 
 Page {
-
     // START for stats section
     property int currentStatsLoad: 0;
 
@@ -63,6 +62,21 @@ Page {
     }
 
     // START HISTORY AND FAVORITES
+
+    // START RELOAD LAST SECTION WHEN PAGE BACK
+    property bool innactive: false;
+
+    onStatusChanged: {
+        if (status == 0){
+            innactive = true
+        }
+        if(innactive && status === 2){
+            table = 'History'
+            lastViwed()
+            innactive = false
+        }
+    }
+    // END RELOAD LAST SECTION WHEN PAGE BACK
 
     property string currentType;
     property string dataURI;
@@ -99,21 +113,26 @@ Page {
                             }
                         }
                     }
-//                    if(table === 'History'){
-//                        lastProgressCircle.visible = true
-//                        lastImage.visible = true
-//                    } else {
-//                        lastFavoriteProgressCircle.visible = true
-//                        lastFavoriteImage.visible = true
-//                    }
+                    // UI
+                    if(table === 'History'){
+                        lastProgressCircle.visible = true
+                        historyLastLbl.font.pixelSize = Theme.fontSizeExtraLarge
+                        historyLastLbl.text = qsTr("Last\nviewed")
+                    } else {
+                        lastFavoriteProgressCircle.visible = true
+                        favoriteLastLbl.font.pixelSize = Theme.fontSizeExtraLarge
+                        favoriteLastLbl.text = qsTr("Last\nfavorite")
+                    }
                 } else {
-//                    if(table === 'History'){
-//                        lastProgressCircle.visible = false
-//                        lastImage.visible = false
-//                    } else {
-//                        lastFavoriteProgressCircle.visible = false
-//                        lastFavoriteImage.visible = false
-//                    }
+                    if(table === 'History'){
+                        lastProgressCircle.visible = false
+                        historyLastLbl.font.pixelSize = Theme.fontSizeMedium
+                        historyLastLbl.text += qsTr("\nHistory is empty")
+                    } else {
+                        lastFavoriteProgressCircle.visible = false
+                        favoriteLastLbl.font.pixelSize = Theme.fontSizeMedium
+                        favoriteLastLbl.text += qsTr("\nFavorites is empty")
+                    }
                 }
             }
         )
@@ -134,22 +153,27 @@ Page {
             // update page on load new xml
             if(status == XmlListModel.Ready){
                 if(count == 1){
+                    console.log('status == XmlListModel.Ready && count == 1')
+                    console.log('currentType=' + currentType)
                     if(currentType === 'lovers'){
                         if(table === 'History')
                             historyLastLbl.text += "\n" + xmlModel.get(0).userName
                         else
                             favoriteLastLbl.text += "\n" + xmlModel.get(0).userName
                     } else {
+                        console.log('xmlModel.get(0).imageUrl=' + xmlModel.get(0).imageUrl)
                         if(table === 'History')
                             lastImage.source = xmlModel.get(0).imageUrl
-                        else
+                        else {
                             lastFavoriteImage.source = xmlModel.get(0).imageUrl
+                        }
                     }
                 }
                 if(table === 'History'){
                     table = 'Favorites'
                     lastViwed()
-                }
+                } else
+                    xml = ''
             }
         }
     }
@@ -216,7 +240,7 @@ Page {
             width: parent.width
 
             PageHeader {
-                title: "Colors explorer"
+                title: qsTr("Colors explorer")
             }
 
             Image{
@@ -244,39 +268,39 @@ Page {
                     anchors.rightMargin: Theme.paddingLarge
                     anchors.topMargin: Theme.paddingSmall
                 }
-                label: "Colors"
+                label: qsTr("Colors")
                 currentIndex: -1
                 width: parent.width
                 onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
-                        text: "New"
+                        text: qsTr("New")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
                                                category: text,
-                                               title: "New colors", })
+                                               titlePage: "New colors", })
                         }
                     }
                     MenuItem {
-                        text: "Top"
+                        text: qsTr("Top")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
                                                category: text,
-                                               title: "Top colors", })
+                                               titlePage: "Top colors", })
                         }
                     }
                     MenuItem {
-                        text: "Random"
+                        text: qsTr("Random")
                         onClicked: {
                             pageStack.push("ItemPage.qml", {
                                                type: "colors",
                                                path: "/colors/color",
                                                category: text,
-                                               title: "Random color", })
+                                               titlePage: "Random color", })
                         }
                     }
                 }
@@ -294,41 +318,41 @@ Page {
                     anchors.rightMargin: Theme.paddingLarge
                     anchors.topMargin: Theme.paddingSmall
                 }
-                label: "Palettes"
+                label: qsTr("Palettes")
                 currentIndex: -1
                 width: parent.width
                 onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
-                        text: "New"
+                        text: qsTr("New")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
                                                category: text,
-                                               title: "New palettes", })
+                                               titlePage: "New palettes", })
                         }
                     }
                     MenuItem {
-                        text: "Top"
+                        text: qsTr("Top")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                heightDelegate: 220,
                                                category: text,
-                                               title: "Top palettes", })
+                                               titlePage: "Top palettes", })
                         }
                     }
                     MenuItem {
-                        text: "Random"
+                        text: qsTr("Random")
                         onClicked: {
                             pageStack.push("ItemPage.qml", {
                                                type: "palettes",
                                                path: "/palettes/palette",
                                                category: text,
-                                               title: "Random palette", })
+                                               titlePage: "Random palette", })
                         }
                     }
                 }
@@ -346,41 +370,41 @@ Page {
                     anchors.rightMargin: Theme.paddingLarge
                     anchors.topMargin: Theme.paddingSmall
                 }
-                label: "Patterns"
+                label: qsTr("Patterns")
                 currentIndex: -1
                 width: parent.width
                 onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
-                        text: "New"
+                        text: qsTr("New")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
                                                category: text,
-                                               title: "New patterns", })
+                                               titlePage: "New patterns", })
                         }
                     }
                     MenuItem {
-                        text: "Top"
+                        text: qsTr("Top")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                heightDelegate: 220,
                                                category: text,
-                                               title: "Top patterns", })
+                                               titlePage: "Top patterns", })
                         }
                     }
                     MenuItem {
-                        text: "Random"
+                        text: qsTr("Random")
                         onClicked: {
                             pageStack.push("ItemPage.qml", {
                                                type: "patterns",
                                                path: "/patterns/pattern",
                                                category: text,
-                                               title: "Random pattern", })
+                                               titlePage: "Random pattern", })
                         }
                     }
                 }
@@ -388,29 +412,29 @@ Page {
 
             ComboBox {
                 id: loversMenuItem
-                label: "Lovers"
+                label: qsTr("Lovers")
                 currentIndex: -1
                 width: parent.width
                 onCurrentIndexChanged: { _clearCurrent() }
                 menu: ContextMenu {
                     MenuItem {
-                        text: "New"
+                        text: qsTr("New")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "lovers",
                                                path: "/lovers/lover",
                                                category: text,
-                                               title: "New lovers", })
+                                               titlePage: "New lovers", })
                         }
                     }
                     MenuItem {
-                        text: "Top"
+                        text: qsTr("Top")
                         onClicked: {
                             pageStack.push("ListPage.qml", {
                                                type: "lovers",
                                                path: "/lovers/lover",
                                                category: text,
-                                               title: "Top lovers", })
+                                               titlePage: "Top lovers", })
                         }
                     }
                 }
@@ -438,6 +462,18 @@ Page {
                 color: 'transparent'
                 width: parent.width
                 height: width / 2
+                Rectangle{
+                    color: 'transparent'
+                    width: parent.width / 2
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    ProgressCircle {
+                        id: lastProgressCircle
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                }
                 Image{
                     id: lastImage
                     width: parent.width / 2
@@ -451,11 +487,6 @@ Page {
                         if(status == Image.Ready){
                             lastProgressCircle.visible = false
                         }
-                    }
-                    ProgressCircle {
-                        id: lastProgressCircle
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
                     }
                     Rectangle{
                         color: "#6d3a3a"
@@ -495,8 +526,8 @@ Page {
 
                     Label {
                         id: historyLastLbl
-                        text: "Last\nviewed"
-                        font.pixelSize: parent.width / 7
+                        text: qsTr("Last\nviewed")
+                        font.pixelSize: Theme.fontSizeExtraLarge
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.paddingSmall
                         anchors.verticalCenter: parent.verticalCenter
@@ -504,11 +535,23 @@ Page {
                     IconButton{
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        icon.source: "image://theme/icon-s-time"
+                        icon.source: "image://theme/icon-m-clock"
                     }
                     MouseArea{
                         anchors.fill: parent
                         onClicked: pageStack.push("HistoryPage.qml")
+                    }
+                }
+                Rectangle{
+                    color: 'transparent'
+                    width: parent.width / 2
+                    height: parent.height
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    ProgressCircle {
+                        id: lastFavoriteProgressCircle
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                     }
                 }
                 Image{
@@ -525,11 +568,6 @@ Page {
                         if(status == Image.Ready){
                             lastFavoriteProgressCircle.visible = false
                         }
-                    }
-                    ProgressCircle {
-                        id: lastFavoriteProgressCircle
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
                     }
                     Rectangle{
                         color: "#6d3a3a"
@@ -569,8 +607,8 @@ Page {
 
                     Label {
                         id: favoriteLastLbl
-                        text: "Last\nfavorite"
-                        font.pixelSize: parent.width / 7
+                        text: qsTr("Last\nfavorite")
+                        font.pixelSize: Theme.fontSizeExtraLarge
                         anchors.left: parent.left
                         anchors.leftMargin: Theme.paddingSmall
                         anchors.verticalCenter: parent.verticalCenter
@@ -595,28 +633,28 @@ Page {
 
             Label{
                 id: totalColorsLbl
-                text: "Total colors: "
+                text: qsTr("Total colors: ")
                 color: Theme.secondaryColor
                 x: Theme.horizontalPageMargin
             }
 
             Label{
                 id: totalPalettesLbl
-                text: "Total palettes: "
+                text: qsTr("Total palettes: ")
                 color: Theme.secondaryColor
                 x: Theme.horizontalPageMargin
             }
 
             Label{
                 id: totalPatternsLbl
-                text: "Total patterns: "
+                text: qsTr("Total patterns: ")
                 color: Theme.secondaryColor
                 x: Theme.horizontalPageMargin
             }
 
             Label{
                 id: totalLoversLbl
-                text: "Total lovers: "
+                text: qsTr("Total lovers: ")
                 color: Theme.secondaryColor
                 x: Theme.horizontalPageMargin
             }

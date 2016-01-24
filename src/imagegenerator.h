@@ -5,6 +5,9 @@
 #include <QFile>
 #include <QUrl>
 #include <QPixmap>
+#include <QDebug>
+#include <QScreen>
+#include <QPainter>
 #include "filedownloader.h"
 
 class ImageGenerator : public QObject
@@ -13,11 +16,13 @@ class ImageGenerator : public QObject
 public:
     explicit ImageGenerator(QObject *parent = 0);
     FileDownloader *fileDownloader;
+    QString fileName;
+    QRect screen;
 
 signals:
 
 public slots:
-    void saveImage(QUrl imageUrl);
+    void saveImage(QUrl imageUrl, QString fileName, int screenWidth, int screenHeight);
     void loadImage();
 };
 

@@ -35,7 +35,7 @@ CoverBackground {
     CoverPlaceholder {
         //% "Default cover"
         text: 'Colors Explorer'
-        icon.source: "image:/iconPrefix/ColorsExplorer.png"
+        icon.source: "qrc:/iconPrefix/ColorsExplorer.png"
     }
 }
 

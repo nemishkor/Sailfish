@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<TS version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
         <source>About</source>
-        <translation>Etwa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hello my friend =)</source>
-        <translation>Hallo mein Freund =)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You can email me suggestions or comments by e-mail: nemish94@gmail.com</source>
-        <translation>Sie können mich mailen Sie Anregungen oder Kommentare per E-Mail: nemish94@gmail.com</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy e-mail to clipboard </source>
-        <translation>Kopieren Sie per E-Mail in die Zwischenablage kopieren</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ColorsSelectorPage</name>
     <message>
         <source>Color picker</source>
-        <translation>Farbauswahl</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color selected</source>
-        <translation>Farbe ausgewählt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Einzelheiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>from 0 to 360</source>
-        <translation>0-360</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>from 0 to 100</source>
-        <translation>0-100</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type here</source>
-        <translation>geben Sie hier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Return key pressed</source>
-        <translation>Return-Taste gedrückt</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FavoritesPage</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished">Favoriten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>UserName: </source>
@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There wil be your
@@ -112,98 +112,96 @@ Now here is empty</source>
     <name>FirstPage</name>
     <message>
         <source>About</source>
-        <translation>Etwa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>History</source>
-        <translation>Geschichte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation>Favoriten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Colors explorer</source>
-        <translation>Farbe explorer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation>Kategorien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation>Farben</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New</source>
-        <translation>neu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Top</source>
-        <translation>Top</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Random</source>
-        <translation>Zufällig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Palettes</source>
-        <translation>Palettes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Patterns</source>
-        <translation>Patterns</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lovers</source>
-        <translation>Lovers</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation>Tools</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color selector</source>
-        <translation>Farbauswahl</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last
 viewed</source>
-        <translation>Letzte
-angesehen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last
 favorite</source>
-        <translation>Letzte
-Favorit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stats</source>
-        <translation>Statistik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Total colors: </source>
-        <translation>Gesamt Farben:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Total palettes: </source>
-        <translation>Anzahl Paletten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Total patterns: </source>
-        <translation>Gesamtmuster:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Total lovers: </source>
-        <translation>Gesamt lovers:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HistoryPage</name>
     <message>
         <source>History</source>
-        <translation type="unfinished">Geschichte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
@@ -211,11 +209,11 @@ Favorit</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">laden Sie mehr</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Nach oben</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There wil be your
@@ -232,146 +230,146 @@ Now here is empty</source>
     <name>ItemPage</name>
     <message>
         <source>Loading</source>
-        <translation>Laden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save to gallery</source>
-        <translation>Sparen Sie zur Galerie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View original link</source>
-        <translation>Original-Link</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next random</source>
-        <translation>nächste Zufalls</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image size: </source>
-        <translation>Bildgröße:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tile</source>
-        <translation>Fliese</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>original</source>
-        <translation>Original</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>fill</source>
-        <translation>füllen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hearts</source>
-        <translation>Hearts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Votes</source>
-        <translation>Stimmen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Ansichten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation>Bemerkungen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User name: </source>
-        <translation>Benutzername:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Description: </source>
-        <translation>Beschreibung:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>RGB</source>
-        <translation>RGB</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HSV</source>
-        <translation>HSV</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hue </source>
-        <translation>Farbton</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>saturation </source>
-        <translation>Sättigung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>value </source>
-        <translation>Wert</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Einzelheiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hex: #</source>
-        <translation>hex: #</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Erstellt:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>id: </source>
-        <translation>id:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date registered: </source>
-        <translation>Registrierungsdatum:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date last active: </source>
-        <translation>Datum Zuletzt aktiv:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rating: </source>
-        <translation>Bewertung:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num colors: </source>
-        <translation>Num Farben:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num palettes: </source>
-        <translation>Num Paletten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num patterns: </source>
-        <translation>Anzahl Muster:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num comments made: </source>
-        <translation>Anzahl Kommentare:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num lovers: </source>
-        <translation>Anzahl Liebhaber:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Num comments on profile: </source>
-        <translation>Anzahl kommentiert Profil:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ListPage</name>
     <message>
         <source>Loading</source>
-        <translation>Laden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation>laden Sie mehr</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>To top</source>
-        <translation>Nach oben</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -25,6 +25,7 @@ void ImageGenerator::loadImage(){
         y += part.height();
     }
     painter.end();
-    picture->save(QString("$HOME/Pictures/%1.png").arg(fileName));
+    qDebug() << QDir::homePath();
+    picture->save(QString("%1/Pictures/%2.png").arg(QDir::homePath()).arg(fileName));
 }
 

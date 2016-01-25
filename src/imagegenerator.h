@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QScreen>
 #include <QPainter>
+#include <QDir>
 #include "filedownloader.h"
 
 class ImageGenerator : public QObject

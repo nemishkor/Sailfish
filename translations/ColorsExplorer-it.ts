@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -17,6 +17,24 @@
     </message>
     <message>
         <source>Copy e-mail to clipboard </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AmbiencesPage</name>
+    <message>
+        <source>Create ambience</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1. Open some pattern.
+2. Pull down page and choice &apos;Save to gallery&apos;.
+3. Open image in gallery and choice in menu &apos;Create ambience&apos;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your pattern will be saved with your device screen size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -48,6 +66,63 @@
     </message>
     <message>
         <source>Return key pressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesPage</name>
+    <message>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UserName: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VIEW </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VIEWS </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOVE </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOVES </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There wil be your
+favorites.
+Now here is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flick right to return to explore</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -193,6 +268,39 @@ Favorites is empty</source>
         <source>Top lovers</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create ambience</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HistoryPage</name>
+    <message>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There wil be your
+local history.
+Now here is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flick right to return to explore</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemPage</name>
@@ -246,10 +354,6 @@ Favorites is empty</source>
     </message>
     <message>
         <source>User name: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -324,6 +428,10 @@ Favorites is empty</source>
         <source>Num comments on profile: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ListPage</name>
@@ -337,6 +445,18 @@ Favorites is empty</source>
     </message>
     <message>
         <source>To top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nothing found.
+Try reset or change filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RangeDialog</name>
+    <message>
+        <source>Lover name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

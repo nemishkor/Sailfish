@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en">
+<TS version="2.0" language="ru" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -24,18 +24,20 @@
     <name>AmbiencesPage</name>
     <message>
         <source>Create ambience</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать атмосферу</translation>
     </message>
     <message>
         <source>1. Open some pattern.
 2. Pull down page and choice &apos;Save to gallery&apos;.
 3. Open image in gallery and choice in menu &apos;Create ambience&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Откройте любой узор.
+2. Потяните вниз страницы и выберите &apos;Сохранить в галерее&apos;.
+3. Откройте изображение в галерее и выберите в меню &apos;Создать атмосферу&apos;</translation>
     </message>
     <message>
         <source>Your pattern will be saved with your device screen size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш рисунок будет сохранен с размером экрана устройства</translation>
     </message>
 </context>
 <context>
@@ -73,57 +75,59 @@
     <name>FavoritesPage</name>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished">Избранные</translation>
+        <translation>Избранные</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">Загрузить больше</translation>
+        <translation>Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Вверх</translation>
+        <translation>Вверх</translation>
     </message>
     <message>
         <source>UserName: </source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя: </translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Имя: </translation>
     </message>
     <message>
         <source>VIEW </source>
-        <translation type="unfinished"></translation>
+        <translation>ПРОСМОТР</translation>
     </message>
     <message>
         <source>VIEWS </source>
-        <translation type="unfinished"></translation>
+        <translation>ПРОСМОТРОВ</translation>
     </message>
     <message>
         <source>LOVE </source>
-        <translation type="unfinished"></translation>
+        <translation>LIKE</translation>
     </message>
     <message>
         <source>LOVES </source>
-        <translation type="unfinished"></translation>
+        <translation>LIKES</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление </translation>
     </message>
     <message>
         <source>There wil be your
 favorites.
 Now here is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Там будут ваши
+Избранные.
+Сейчас здесь пусто</translation>
     </message>
     <message>
         <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation>Проведите вправо для возвращения, чтобы исследовать</translation>
     </message>
 </context>
 <context>
@@ -274,36 +278,38 @@ Favorites is empty</source>
     </message>
     <message>
         <source>Create ambience</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать атмосферу</translation>
     </message>
 </context>
 <context>
     <name>HistoryPage</name>
     <message>
         <source>History</source>
-        <translation type="unfinished">История</translation>
+        <translation>История</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished">Загрузить больше</translation>
+        <translation>Загрузить больше</translation>
     </message>
     <message>
         <source>To top</source>
-        <translation type="unfinished">Вверх</translation>
+        <translation>Вверх</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <source>There wil be your
 local history.
 Now here is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Там будет ваша
+история.
+Сейчас здесь пусто</translation>
     </message>
     <message>
         <source>Flick right to return to explore</source>
-        <translation type="unfinished"></translation>
+        <translation>Проведите вправо для возвращения, чтобы исследовать</translation>
     </message>
 </context>
 <context>
@@ -434,7 +440,7 @@ Now here is empty</source>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
 </context>
 <context>
@@ -454,14 +460,15 @@ Now here is empty</source>
     <message>
         <source>Nothing found.
 Try reset or change filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего не найдено.
+Попробуйте сбросить или изменить фильтры</translation>
     </message>
 </context>
 <context>
     <name>RangeDialog</name>
     <message>
         <source>Lover name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя любителя</translation>
     </message>
 </context>
 </TS>

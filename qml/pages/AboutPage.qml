@@ -53,7 +53,7 @@ Page {
                 text: '\tv.0.8\n' +
                       'changed view on itemPage\n' +
                       'added filters\n' +
-                      'added view one record (open user info on click on userName)\n' +
+                      'added view one record\n(open user info on click on userName)\n' +
                       '\tv.0.7\n' +
                       'added auto Deutsch translation\n' +
                       'added Russian\n' +

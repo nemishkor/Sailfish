@@ -127,11 +127,11 @@ Page {
                     if(table === 'History'){
                         lastProgressCircle.visible = false
                         historyLastLbl.font.pixelSize = Theme.fontSizeMedium
-                        historyLastLbl.text += qsTr("\nHistory is empty")
+                        historyLastLbl.text = qsTr("Last\nviewed") + qsTr("\nHistory is empty")
                     } else {
                         lastFavoriteProgressCircle.visible = false
                         favoriteLastLbl.font.pixelSize = Theme.fontSizeMedium
-                        favoriteLastLbl.text += qsTr("\nFavorites is empty")
+                        favoriteLastLbl.text = qsTr("Last\nfavorite") + qsTr("\nFavorites is empty")
                     }
                 }
             }

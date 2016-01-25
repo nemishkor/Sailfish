@@ -116,11 +116,11 @@ Page {
                     // UI
                     if(table === 'History'){
                         lastProgressCircle.visible = true
-                        historyLastLbl.font.pixelSize = Theme.fontSizeExtraLarge
+                        historyLastLbl.font.pixelSize = Theme.fontSizeLarge
                         historyLastLbl.text = qsTr("Last\nviewed")
                     } else {
                         lastFavoriteProgressCircle.visible = true
-                        favoriteLastLbl.font.pixelSize = Theme.fontSizeExtraLarge
+                        favoriteLastLbl.font.pixelSize = Theme.fontSizeLarge
                         favoriteLastLbl.text = qsTr("Last\nfavorite")
                     }
                 } else {
@@ -153,18 +153,20 @@ Page {
             // update page on load new xml
             if(status == XmlListModel.Ready){
                 if(count == 1){
-                    console.log('status == XmlListModel.Ready && count == 1')
-                    console.log('currentType=' + currentType)
-                    if(currentType === 'lovers'){
-                        if(table === 'History')
-                            historyLastLbl.text += "\n" + xmlModel.get(0).userName
-                        else
-                            favoriteLastLbl.text += "\n" + xmlModel.get(0).userName
+                    if(currentType === 'lover'){
+                        if(table === 'History'){
+                            lastImage.fillMode = Image.PreserveAspectFit
+                            lastImage.source = "image://theme/icon-l-people"
+                        } else {
+                            lastFavoriteImage.fillMode = Image.PreserveAspectFit
+                            lastFavoriteImage.source = "image://theme/icon-l-people"
+                        }
                     } else {
-                        console.log('xmlModel.get(0).imageUrl=' + xmlModel.get(0).imageUrl)
-                        if(table === 'History')
+                        if(table === 'History'){
+                            lastImage.fillMode = Image.Tile
                             lastImage.source = xmlModel.get(0).imageUrl
-                        else {
+                        } else {
+                            lastFavoriteImage.fillMode = Image.Tile
                             lastFavoriteImage.source = xmlModel.get(0).imageUrl
                         }
                     }
@@ -214,7 +216,7 @@ Page {
     }
 
     id: coverPage
-    orientation: Orientation.All
+    orientation: orientation.All
 
     SilicaFlickable {
         anchors.fill: parent
@@ -478,10 +480,10 @@ Page {
                     id: lastImage
                     width: parent.width / 2
                     height: parent.height
+                    fillMode: Image.Tile
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    fillMode: Image.Tile
                     onProgressChanged: lastProgressCircle.value = progress
                     onStatusChanged: {
                         if(status == Image.Ready){
@@ -659,7 +661,21 @@ Page {
                 x: Theme.horizontalPageMargin
             }
 
+            Item{
+                width: parent.width
+                height: Theme.paddingMedium
+            }
+
         }
+
+        PushUpMenu{
+            id: pushUpMenu
+            MenuItem{
+                text: qsTr("Create ambience")
+                onClicked: pageStack.push(Qt.resolvedUrl("AmbiencesPage.qml"))
+            }
+        }
+
     }
 }
 

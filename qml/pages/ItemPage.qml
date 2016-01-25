@@ -37,13 +37,20 @@ import ImageGenerator 1.0
 Page {
     id: page
 
-    property int id; // its id for search via api for palettes and patterns
+    // START params for push page in pageStack
+
+    // required fields for all content
+    property string type;
+    property string category;
+
+    // propertis for opening item from ListPage
+    property string id; // its id for search via api for palettes and patterns
     property string tittle;
     property string userName; // its id for search via api for lovers only
-    property int numViews;
-    property int numVotes;
-    property int numComments;
-    property int numHearts;
+    property string numViews;
+    property string numVotes;
+    property string numComments;
+    property string numHearts;
     property string dateCreated;
     property string hex; // its id for search via api for colors only
     property string red;
@@ -57,7 +64,7 @@ Page {
     property string imageUrl;
     property string badgeUrl;
     property string apiUrl;
-
+    // propertis for open from only lovers listPage
     property string dateRegistered;
     property string dateLastActive;
     property string rating;
@@ -68,16 +75,18 @@ Page {
     property string numLovers;
     property string numCommentsOnProfile;
 
-    property string type;
-    property string category;
+    // for One and Random types
     property string path: '/';
+
+    property bool addToHistory: true;
+
+    // END params for push page in pageStack
+
     property string dataURI;
 
     property var randomHistory: new Array();
     property int randomAction;
     property int currentRandomHistoryIndex: -1;
-
-    property bool addToHistory: true;
 
     XmlListModel{
         id: listModel
@@ -103,11 +112,21 @@ Page {
         XmlRole {name: "imageUrl"; query: "imageUrl/string()"}
         XmlRole {name: "badgeUrl"; query: "badgeUrl/string()"}
         XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
+        XmlRole {name: "dateRegistered"; query: "dateRegistered/string()"}
+        XmlRole {name: "dateLastActive"; query: "dateLastActive/string()"}
+        XmlRole {name: "rating"; query: "rating/string()"}
+        XmlRole {name: "numColors"; query: "numColors/string()"}
+        XmlRole {name: "numPalettes"; query: "numPalettes/string()"}
+        XmlRole {name: "numPatterns"; query: "numPatterns/string()"}
+        XmlRole {name: "numCommentsMade"; query: "numCommentsMade/string()"}
+        XmlRole {name: "numLovers"; query: "numLovers/string()"}
+        XmlRole {name: "numCommentsOnProfile"; query: "numCommentsOnProfile/string()"}
         onStatusChanged: {
             // update page on load new xml
             if(status == XmlListModel.Ready){
+                console.log('status == XmlListModel.Ready')
                 if(count == 1){
-
+                    console.log('count == 1')
                     // UI
                     id = listModel.get(0).id
                     category = category
@@ -130,32 +149,45 @@ Page {
                     imageUrl = listModel.get(0).imageUrl
                     badgeUrl = listModel.get(0).badgeUrl
                     apiUrl = listModel.get(0).apiUrl
+                    dateRegistered = listModel.get(0).dateRegistered
+                    dateLastActive = listModel.get(0).dateLastActive
+                    rating = listModel.get(0).rating
+                    numColors = listModel.get(0).numColors
+                    numPalettes = listModel.get(0).numPalettes
+                    numPatterns = listModel.get(0).numPatterns
+                    numCommentsMade = listModel.get(0).numCommentsMade
+                    numLovers = listModel.get(0).numLovers
+                    numCommentsOnProfile = listModel.get(0).numCommentsOnProfile
 
                     // UX
                     loadingModel.visible = false
-                    column.visible = true
+                    if(type === "lovers"){
+                        console.log("type === lovers")
+                        column.visible = false
+                        columnLovers.visible = true
+                    } else {
+                        console.log("type != lovers")
+                        column.visible = true
+                        columnLovers.visible = false
+                    }
 
-                    // history (local)
-                    if(randomAction == -1){ // if open prev color in history
-                        if(randomHistory[currentRandomHistoryIndex - 1])
-                            currentRandomHistoryIndex--
-                    }
-                    if(randomAction == 0){ // if search random color when you open not latest color from history
-                        currentRandomHistoryIndex = randomHistory.length
-                        var tmp = randomHistory;
-                        tmp.push(hex)
-                        randomHistory = tmp
-                        // history (global)
-                        if(type == "lovers")
-                            addRow(type, userName)
-                        else
-                            if(type == "palettes" || type == "patterns")
-                                addRow(type, id)
-                            else // else colors
-                                addRow(type, hex)
-                    }
-                    if(randomAction == 1){ // if open next color in history or search random
-                        currentRandomHistoryIndex++
+                    if(category != "One") {
+                        // history (local)
+                        if(randomAction == -1){ // if open prev color in history
+                            if(randomHistory[currentRandomHistoryIndex - 1])
+                                currentRandomHistoryIndex--
+                        }
+                        if(randomAction == 0){ // if search random color when you open not latest color from history
+                            currentRandomHistoryIndex = randomHistory.length
+                            var tmp = randomHistory;
+                            tmp.push(getIdField())
+                            randomHistory = tmp
+                            // history (global)
+                            addRow(type, getIdField())
+                        }
+                        if(randomAction == 1){ // if open next color in history or search random
+                            currentRandomHistoryIndex++
+                        }
                     }
                     searchFavorites()
                 }
@@ -163,16 +195,41 @@ Page {
         }
     }
 
+    function typeConvert(){
+        return type.substr(0, type.length - 1)
+    }
+
+    function getIdField(){
+        if(type === "colors")
+            return hex
+        if(type === "lovers")
+            return userName
+        else
+            return id
+    }
+
     function loadXml(){
         var id;
-        if(randomAction == 1){ // if open next color in history
-            dataURI = "http://www.colourlovers.com/api/color/" + randomHistory[currentRandomHistoryIndex + 1]
-        } else {
-            if(randomAction == -1){ // if open prev color in history
-                dataURI = "http://www.colourlovers.com/api/color/" + randomHistory[currentRandomHistoryIndex - 1]
-            } else
-                dataURI = "http://www.colourlovers.com/api/" + type + "/random"
+        var type
+        if(category === "One"){
+            type = typeConvert()
+            id = getIdField()
+        } else { // else Random page
+            if(randomAction == 1){ // if open next item in history
+                type = typeConvert()
+                id = randomHistory[currentRandomHistoryIndex + 1]
+            }
+            if(randomAction == -1){ // if open prev item in history
+                type = typeConvert()
+                id = randomHistory[currentRandomHistoryIndex - 1]
+            } else { // else search new random
+                type = page.type
+                id = "random"
+            }
         }
+        dataURI = "http://www.colourlovers.com/api/" + type + "/" + id
+        console.log(dataURI)
+        console.log("!")
         var req = new XMLHttpRequest();
         req.open("get", dataURI);
         req.send();
@@ -212,7 +269,6 @@ Page {
     }
 
     function addRow(newType, newId) {
-        console.log('addRow()')
         var db = LocalStorage.openDatabaseSync("ColorsExplorerDB", "1.0", "", 1000000);
         db.transaction(
             function(tx) {
@@ -265,31 +321,35 @@ Page {
         )
     }
 
+    function getRandom(){
+        randomAction = 0
+        loadXml()
+    }
+
+    function getOne(){
+        loadXml()
+    }
+
     // END history logic
 
     Component.onCompleted: {
         initDb
-        if(category == "Random"){
-            randomAction = 0
-            loadXml()
-        } else {
-            searchFavorites()
-            if(addToHistory) {
-                if(type == "lovers")
-                    addRow(type, userName)
-                else
-                    if(type == "palettes" || type == "patterns")
-                        addRow(type, id)
-                    else // else colors
-                        addRow(type, hex)
+        if(category == "Random"){ // load random item
+            getRandom()
+        } else { // load item using identifier (hex, userName or id)
+            if(category == "One")
+                getOne()
+            else { // open from list
+                searchFavorites()
+                if(addToHistory)
+                    addRow(type, getIdField())
             }
         }
-        console.log('type=' + type + ' category=' + category)
     }
 
     ProgressBar {
         id: loadingModel
-        visible: (category == "Random") ? true : false
+        visible: (category === "Random" || category === "One") ? true : false
         width: parent.width
         height: 50
         indeterminate: true
@@ -316,6 +376,7 @@ Page {
 
         PullDownMenu{
             MenuItem {
+                visible: (imageUrl != "") ? true : false
                 text: qsTr("Save to gallery")
                 onClicked: {
                     imageGenerator.saveImage(imageUrl, tittle, page.width, page.height)
@@ -620,28 +681,18 @@ Page {
                 }
             }
 
-//            Row{
-//                x: Theme.paddingMedium
-//                width: parent.width - 2 * Theme.paddingMedium
-//                Button{
-//                    text: qsTr("Save to gallery")
-//                }
-//                Button{
-//                    text: qsTr("Send")
-//                }
-//            }
-            Label{
-                id: userNameLbl
-                width: parent.width - 2 * Theme.paddingMedium;
-                x: Theme.paddingMedium;
-                text: qsTr("User name: ") + userName
+            SectionHeader{
+                text: qsTr("Description")
+                visible: (description === "") ? false : true
             }
+
             Label{
+                visible: (description === "") ? false : true
                 width: parent.width - 2 * Theme.paddingMedium
                 x: Theme.paddingMedium
-                text: qsTr("Description: ") + description
+                text: description
                 horizontalAlignment: Text.AlignLeft
-                //truncationMode: TruncationMode.Fade
+                //truncationMode: truncationMode.Fade
                 color: Theme.secondaryHighlightColor
                 wrapMode: Text.WordWrap
                 MouseArea{
@@ -867,12 +918,12 @@ Page {
                             GradientStop{ position: 0.5; color: "#" + hex }
                             GradientStop{ position: 1.0; color: "#fff" }
                         }
-                        height: parent.width * value / 255
+                        height: parent.width * value / 100
                         width: 32
                         anchors.left: parent.left
                         anchors.top: parent.top
-                        anchors.leftMargin: parent.width * value / 255 / 2 - 16
-                        anchors.topMargin: -1 * parent.width * value / 255 / 2 + 16
+                        anchors.leftMargin: parent.width * value / 100 / 2 - 16
+                        anchors.topMargin: -1 * parent.width * value / 100 / 2 + 16
                         Label{
                             id: valIndLbl
                             font.pixelSize: 22
@@ -894,23 +945,71 @@ Page {
             SectionHeader {
                 text: qsTr("Details")
             }
-            Label{
-                id: hexLbl
+
+            Row{
+                height: userNameLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+
+                Label{
+                    id: userNameLbl
+                    text: qsTr("User name: ")
+                }
+                Label{
+                    text: userName
+                    color: Theme.secondaryColor
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("ItemPage.qml"), {
+                                                      userName: userName,
+                                                      category: "One",
+                                                      type: "lovers",
+                                                      path: "/lovers/lover"})
+                    }
+                }
+            }
+
+            Row{
+                height: hexLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
                 visible: (type == "colors") ? true : false
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("hex: #") + hex
+                Label{
+                    id: hexLbl
+                    text: qsTr("hex: #")
+                }
+                Label{
+                    text: hex
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
+
+            Row{
+                height: createdLbl.height
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
-                text: qsTr("Created: ") + dateCreated
+                Label{
+                    id: createdLbl
+                    text: qsTr("Created: ")
+                }
+                Label{
+                    text: dateCreated
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                id: idLbl
+
+            Row{
+                height: idLbl.height
                 width: parent.width - 2 * Theme.paddingMedium;
                 x: Theme.paddingMedium;
-                text: qsTr("id: ") + id
+                Label{
+                    id: idLbl
+                    text: qsTr("id: ")
+                }
+                Label{
+                    text: id
+                    color: Theme.secondaryColor
+                }
             }
 
             /*
@@ -950,6 +1049,7 @@ Page {
             width: parent.width
             spacing: Theme.paddingMedium
             anchors.bottomMargin: Theme.paddingLarge
+
             PageHeader {
                 title: userName
             }
@@ -957,50 +1057,131 @@ Page {
             SectionHeader {
                 text: qsTr("Details")
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Date registered: ") + dateRegistered
+
+            Row{
+                height: dateRegLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: dateRegLbl
+                    text: qsTr("Date registered: ")
+                }
+                Label{
+                    text: dateRegistered
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Date last active: ") + dateLastActive
+
+            Row{
+                height: dateLastActiveLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: dateLastActiveLbl
+                    text: qsTr("Date last active: ")
+                }
+                Label{
+                    text: dateLastActive
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Rating: ") + rating
+
+            Row{
+                height: ratingLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: ratingLbl
+                    text: qsTr("Rating: ")
+                }
+                Label{
+                    text: rating
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num colors: ") + numColors
+
+            Row{
+                height: numColorsLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numColorsLbl
+                    text: qsTr("Num colors: ")
+                }
+                Label{
+                    text: numColors
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num palettes: ") + numPalettes
+
+            Row{
+                height: numPalettesLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numPalettesLbl
+                    text: qsTr("Num palettes: ")
+                }
+                Label{
+                    text: numPalettes
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num patterns: ") + numPatterns
+
+            Row{
+                height: numPatternsLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numPatternsLbl
+                    text: qsTr("Num patterns: ")
+                }
+                Label{
+                    text: numPatterns
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num comments made: ") + numCommentsMade
+
+            Row{
+                height: numCommentsMadeLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numCommentsMadeLbl
+                    text: qsTr("Num comments made: ")
+                }
+                Label{
+                    text: numCommentsMade
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num lovers: ") + numLovers
+
+            Row{
+                height: numLoversLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numLoversLbl
+                    text: qsTr("Num lovers: ")
+                }
+                Label{
+                    text: numLovers
+                    color: Theme.secondaryColor
+                }
             }
-            Label{
-                width: parent.width - 2 * Theme.paddingMedium
-                x: Theme.paddingMedium
-                text: qsTr("Num comments on profile: ") + numCommentsOnProfile
+
+            Row{
+                height: numCommentsOnProfileLbl.height
+                width: parent.width - 2 * Theme.paddingMedium;
+                x: Theme.paddingMedium;
+                Label{
+                    id: numCommentsOnProfileLbl
+                    text: qsTr("Num comments on profile: ")
+                }
+                Label{
+                    text: numCommentsOnProfile
+                    color: Theme.secondaryColor
+                }
             }
         }
 

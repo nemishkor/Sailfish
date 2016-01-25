@@ -18,5 +18,6 @@
     </qresource>
     <qresource prefix="/">
         <file>qml/content/History.js</file>
+        <file>images/hue-line.png</file>
     </qresource>
 </RCC>

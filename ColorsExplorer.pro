@@ -18,7 +18,7 @@ SOURCES += src/ColorsExplorer.cpp \
     src/clipboard.cpp \
     src/filedownloader.cpp \
     src/imagegenerator.cpp \
-    src/utils.cpp
+    src/utils.cpp \
 
 OTHER_FILES += qml/ColorsExplorer.qml \
     qml/cover/CoverPage.qml \
@@ -63,5 +63,6 @@ HEADERS += \
 DISTFILES += \
     qml/pages/HistoryPage.qml \
     qml/pages/FavoritesPage.qml \
-    qml/dialogs/RangeDialog.qml
+    qml/dialogs/RangeDialog.qml \
+    qml/pages/AmbiencesPage.qml
 

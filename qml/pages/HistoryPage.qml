@@ -269,7 +269,7 @@ Page{
             MenuItem{
                 text: qsTr("Clear")
                 onClicked: {
-                    remorse.execute("Clearing history", clearDb )
+                    remorse.execute(qsTr("Clearing history"), clearDb )
                 }
                 RemorsePopup { id: remorse }
             }

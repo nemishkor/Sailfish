@@ -73,8 +73,8 @@ Page {
         XmlRole {name: "badgeUrl"; query: "badgeUrl/string()"}
         XmlRole {name: "apiUrl"; query: "apiUrl/string()"}
         onStatusChanged: {
-            if(status == XmlListModel.Ready)
-                if(count == 1)
+            if(status == XmlListModel.Ready){
+                if(count == 1){
                     if(category == "Random"){
                         pageStack.push("ItemPage.qml", {
                                            id: listModel.get(0).id,
@@ -100,6 +100,13 @@ Page {
                                            apiUrl: listModel.get(0).apiUrl,
                                            type: listModel.get(0).type })
                     }
+                }
+                if(count === 0){
+                    noResultLbl.visible = true
+                } else {
+                    noResultLbl.visible = false
+                }
+            }
         }
     }
 
@@ -138,11 +145,17 @@ Page {
     property int hueMax: 359
     property int briMin: 0
     property int briMax: 99
+    property string lover
+    property string keywords
+    property string orderCol
+    property string sortBy
 
     function loadXml(){
         listModel.xml = ""
         listModel.reload()
-        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=20" + "&resultOffset=" + resultOffset + "&hueRange=" + hueMin + "," + hueMax + "&briRange=" + briMin + "," + briMax
+        dataURI = "http://www.colourlovers.com/api/" + type + "/" + category + "?numResults=20" + "&resultOffset=" + resultOffset + "&orderCol=" + orderCol + "&sortBy=" + sortBy + "&lover=" + lover + "&keywords=" + keywords
+        if(type === "colors")
+            dataURI += "&hueRange=" + hueMin + "," + hueMax + "&briRange=" + briMin + "," + briMax
         console.log(dataURI)
         var req = new XMLHttpRequest()
         req.open("get", dataURI)
@@ -193,7 +206,16 @@ Page {
         }
     }
 
-
+    Label{
+        id: noResultLbl
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        width: parent.width
+        visible: false
+        horizontalAlignment: Text.AlignHCenter
+        text: qsTr("Nothing found.\nTry reset or change filters")
+        wrapMode: TextEdit.WordWrap
+    }
 
     SilicaListView
     {
@@ -208,11 +230,26 @@ Page {
             IconButton {
                 icon.source: 'image://theme/icon-m-search'
                 onClicked: {
-                    var dialog = pageStack.push("../dialogs/RangeDialog.qml", {hueMin: hueMin, hueMax: hueMax, briMin: briMin, briMax: briMax,})
+                    var dialog = pageStack.push("../dialogs/RangeDialog.qml", {
+                                                    type: type,
+                                                    hueMin: hueMin,
+                                                    hueMax: hueMax,
+                                                    briMin: briMin,
+                                                    briMax: briMax,
+                                                    lover: lover,
+                                                    keywords: keywords,
+                                                    orderCol: orderCol,
+                                                    sortBy: sortBy,
+                                                })
                     dialog.accepted.connect(function() {
                         var reload = false
-                        if(hueMin !== dialog.hueMin || hueMax !== dialog.hueMax || briMin !== dialog.briMin || briMax !== dialog.briMax)
+                        if(orderCol !== dialog.orderCol || sortBy !== dialog.sortBy || keywords !== dialog.keywords || lover !== dialog.lover || hueMin !== dialog.hueMin || hueMax !== dialog.hueMax || briMin !== dialog.briMin || briMax !== dialog.briMax){
                             reload = true
+                        }
+                        orderCol = dialog.orderCol
+                        sortBy = dialog.sortBy
+                        keywords = dialog.keywords
+                        lover = dialog.lover
                         hueMin = dialog.hueMin
                         hueMax = dialog.hueMax
                         briMin = dialog.briMin
@@ -339,7 +376,7 @@ Page {
         height: parent.height
         header: PageHeader {
             id: loversHeader
-            title: qsTr(title)
+            title: qsTr(titlePage)
         }
         model : loversModel
         delegate: BackgroundItem {
@@ -349,26 +386,30 @@ Page {
                 text: userName
                 x: Theme.horizontalPageMargin
                 anchors.verticalCenter: parent.verticalCenter
-                MouseArea{
-
-                    anchors.fill: parent
-                    onClicked: {
-                        pageStack.push("ItemPage.qml", {
-                                           userName: userName,
-                                           category: category,
-                                           dateRegistered: dateRegistered,
-                                           dateLastActive: dateLastActive,
-                                           rating: rating,
-                                           numColors: numColors,
-                                           numPalettes: numPalettes,
-                                           numPatterns: numPatterns,
-                                           numCommentsMade: numCommentsMade,
-                                           numLovers: numLovers,
-                                           numCommentsOnProfile: numCommentsOnProfile,
-                                           url: url,
-                                           apiUrl: apiUrl,
-                                           type: type })
-                    }
+            }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log('userName=' + userName)
+                    console.log('category=' + category)
+                    console.log('url=' + url)
+                    console.log('apiUrl=' + apiUrl)
+                    console.log('type=' + type)
+                    pageStack.push(Qt.resolvedUrl("ItemPage.qml"), {
+                                       userName: userName,
+                                       category: category,
+                                       dateRegistered: dateRegistered,
+                                       dateLastActive: dateLastActive,
+                                       rating: rating,
+                                       numColors: numColors,
+                                       numPalettes: numPalettes,
+                                       numPatterns: numPatterns,
+                                       numCommentsMade: numCommentsMade,
+                                       numLovers: numLovers,
+                                       numCommentsOnProfile: numCommentsOnProfile,
+                                       url: url,
+                                       apiUrl: apiUrl,
+                                       type: type })
                 }
             }
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru" sourcelanguage="en">
+<TS version="2.1" language="ru" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -311,6 +311,10 @@ Now here is empty</source>
         <source>Flick right to return to explore</source>
         <translation>Проведите вправо для возвращения, чтобы исследовать</translation>
     </message>
+    <message>
+        <source>Clearing history</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemPage</name>
@@ -469,6 +473,54 @@ Try reset or change filters</source>
     <message>
         <source>Lover name</source>
         <translation>Имя любителя</translation>
+    </message>
+    <message>
+        <source>Keywords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number votes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DESC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

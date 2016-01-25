@@ -133,6 +133,10 @@ Page {
                         favoriteLastLbl.font.pixelSize = Theme.fontSizeMedium
                         favoriteLastLbl.text = qsTr("Last\nfavorite") + qsTr("\nFavorites is empty")
                     }
+                    if(table === 'History') {
+                        table = 'Favorites'
+                        lastViwed()
+                    }
                 }
             }
         )

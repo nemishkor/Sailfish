@@ -202,19 +202,19 @@ favorite</source>
     </message>
     <message>
         <source>Total colors: </source>
-        <translation>Всего цветов:</translation>
+        <translation>Всего цветов: </translation>
     </message>
     <message>
         <source>Total palettes: </source>
-        <translation>Всего палитр:</translation>
+        <translation>Всего палитр: </translation>
     </message>
     <message>
         <source>Total patterns: </source>
-        <translation>Всего узоров:</translation>
+        <translation>Всего узоров: </translation>
     </message>
     <message>
         <source>Total lovers: </source>
-        <translation>Всего любителей:</translation>
+        <translation>Всего любителей: </translation>
     </message>
     <message>
         <source>
@@ -326,7 +326,7 @@ Now here is empty</source>
     </message>
     <message>
         <source>Image size: </source>
-        <translation>Размер изображения:</translation>
+        <translation>Размер изображения: </translation>
     </message>
     <message>
         <source>tile</source>
@@ -358,7 +358,7 @@ Now here is empty</source>
     </message>
     <message>
         <source>User name: </source>
-        <translation>Имя пользователя:</translation>
+        <translation>Имя пользователя: </translation>
     </message>
     <message>
         <source>RGB</source>
@@ -390,47 +390,47 @@ Now here is empty</source>
     </message>
     <message>
         <source>Created: </source>
-        <translation>Создано:</translation>
+        <translation>Создано: </translation>
     </message>
     <message>
         <source>id: </source>
-        <translation>id:</translation>
+        <translation>id: </translation>
     </message>
     <message>
         <source>Date registered: </source>
-        <translation>Дата регистрации:</translation>
+        <translation>Дата регистрации: </translation>
     </message>
     <message>
         <source>Date last active: </source>
-        <translation>Дата последней активности:</translation>
+        <translation>Дата последней активности: </translation>
     </message>
     <message>
         <source>Rating: </source>
-        <translation>Рейтинг:</translation>
+        <translation>Рейтинг: </translation>
     </message>
     <message>
         <source>Num colors: </source>
-        <translation>Кол цветов:</translation>
+        <translation>Кол цветов: </translation>
     </message>
     <message>
         <source>Num palettes: </source>
-        <translation>Кол палитры:</translation>
+        <translation>Кол палитры: </translation>
     </message>
     <message>
         <source>Num patterns: </source>
-        <translation>Кол узоров:</translation>
+        <translation>Кол узоров: </translation>
     </message>
     <message>
         <source>Num comments made: </source>
-        <translation>Кол замечания:</translation>
+        <translation>Кол замечания: </translation>
     </message>
     <message>
         <source>Num lovers: </source>
-        <translation>Кол любителей:</translation>
+        <translation>Кол любителей: </translation>
     </message>
     <message>
         <source>Num comments on profile: </source>
-        <translation>Кол комментариев на странице профиля:</translation>
+        <translation>Кол комментариев на странице профиля: </translation>
     </message>
     <message>
         <source>Description</source>

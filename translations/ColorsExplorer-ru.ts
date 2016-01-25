@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en">
+<TS version="2.0" language="ru" sourcelanguage="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -313,7 +313,7 @@ Now here is empty</source>
     </message>
     <message>
         <source>Clearing history</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить историю</translation>
     </message>
 </context>
 <context>
@@ -476,51 +476,51 @@ Try reset or change filters</source>
     </message>
     <message>
         <source>Keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключевые слова</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Date created</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата создания</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Очки</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Number votes</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество голосов</translation>
     </message>
     <message>
         <source>Number views</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество просмотров</translation>
     </message>
     <message>
         <source>DESC</source>
-        <translation type="unfinished"></translation>
+        <translation>по убыванию</translation>
     </message>
     <message>
         <source>ASC</source>
-        <translation type="unfinished"></translation>
+        <translation>по возрастанию</translation>
     </message>
     <message>
         <source>Reset filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить фильтры</translation>
     </message>
     <message>
         <source>Order by</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать по</translation>
     </message>
     <message>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок</translation>
     </message>
 </context>
 </TS>

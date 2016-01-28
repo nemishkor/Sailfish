@@ -10,7 +10,7 @@ Dialog{
     property int originalWidth;
     property int originalHeight;
     property string fileName;
-    property bool blacken: false;
+    property bool blacken: true;
     property string overlayColor;
     property int overlayOpacity;
 

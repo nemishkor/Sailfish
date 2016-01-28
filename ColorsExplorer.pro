@@ -58,11 +58,13 @@ HEADERS += \
     src/clipboard.h \
     src/filedownloader.h \
     src/imagegenerator.h \
-    src/utils.h
+    src/utils.h \
+    qml/dialogs/imagesaver.h
 
 DISTFILES += \
     qml/pages/HistoryPage.qml \
     qml/pages/FavoritesPage.qml \
     qml/dialogs/RangeDialog.qml \
-    qml/pages/AmbiencesPage.qml
+    qml/pages/AmbiencesPage.qml \
+    qml/dialogs/SizeDialog.qml
 

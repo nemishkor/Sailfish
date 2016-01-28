@@ -34,6 +34,7 @@
 #include <QtQml>
 #include <sailfishapp.h>
 #include "imagegenerator.h"
+#include "imagesaver.h"
 
 
 int main(int argc, char *argv[])

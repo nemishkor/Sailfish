@@ -514,4 +514,43 @@ Try reset or change filters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>SizeDialog</name>
+    <message>
+        <source>Image size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1x1 (for ambience)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>screen size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>original size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blacken the edges</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add overlay color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choice color below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay opacity (less - more transparent)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

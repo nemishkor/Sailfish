@@ -71,6 +71,11 @@ Page {
                       'other fixes'
             }
 
+            Item{
+                width: parent.width
+                height: Theme.paddingLarge
+            }
+
         }
 
 
